@@ -125,7 +125,7 @@
         
         <div class="summary">
             <h2>Executive Summary</h2>
-            <p>Analysis performed on 2024-12-28 13:54:33</p>
+            <p>Analysis performed on 2024-12-28 14:14:48</p>
             <div class="metrics">
                 <div class="metric-card">
                     <div class="metric-label">Successfully Analyzed</div>
@@ -133,11 +133,11 @@
                 </div>
                 <div class="metric-card">
                     <div class="metric-label">Failed Analyses</div>
-                    <div class="metric-value">5</div>
+                    <div class="metric-value">4</div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-label">Total Holdings</div>
-                    <div class="metric-value">22</div>
+                    <div class="metric-value">21</div>
                 </div>
             </div>
             
@@ -155,7 +155,7 @@
 
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
-                    const visualizationData = JSON.parse('{"position_actions": {"data": [0, 0, 17], "labels": ["buy", "sell", "hold"]}, "sector_distribution": {"data": [4, 4, 2, 1, 3, 1, 2, 1, 3, 1], "labels": ["Quantum Computing", "Bitcoin Mining", "Deep Tech \u0026 AI", "Space Technology", "Drone Technology", "Oil \u0026 Gas", "Data Center \u0026 AI", "Rare Earth Metals", "Nuclear Energy", "Robotics"]}, "sector_sentiment": {"bearish": [7, 6, 5, 1, 5, 0, 4, 3, 3, 2], "bullish": [6, 1, 3, 1, 2, 0, 1, 0, 0, 1], "neutral": [3, 5, 0, 2, 1, 0, 3, 1, 1, 1], "sectors": ["Quantum Computing", "Bitcoin Mining", "Deep Tech \u0026 AI", "Space Technology", "Drone Technology", "Oil \u0026 Gas", "Data Center \u0026 AI", "Rare Earth Metals", "Nuclear Energy", "Robotics"]}}');
+                    const visualizationData = JSON.parse('{"position_actions": {"data": [0, 0, 17], "labels": ["buy", "sell", "hold"]}, "sector_distribution": {"data": [4, 3, 2, 1, 3, 1, 2, 1, 3, 1], "labels": ["Quantum Computing", "Bitcoin", "Deep Tech \u0026 AI", "Space Technology", "Drone Technology", "Oil \u0026 Gas", "Data Center \u0026 AI", "Rare Earth Metals", "Nuclear Energy", "Robotics"]}, "sector_sentiment": {"bearish": [7, 6, 5, 1, 5, 0, 4, 3, 3, 2], "bullish": [6, 1, 3, 1, 2, 0, 1, 0, 0, 1], "neutral": [3, 5, 0, 2, 1, 0, 3, 1, 1, 1], "sectors": ["Quantum Computing", "Bitcoin", "Deep Tech \u0026 AI", "Space Technology", "Drone Technology", "Oil \u0026 Gas", "Data Center \u0026 AI", "Rare Earth Metals", "Nuclear Energy", "Robotics"]}}');
                 
                 // Sector Distribution Chart
                 new Chart(document.getElementById('sectorDistribution'), {
@@ -263,40 +263,40 @@
                     <tr>
                         <td><strong>QBTS</strong></td>
                         <td class="neutral">hold</td>
-                        <td class="">35.0%</td>
-                        <td>neutral (Technical Analysis), bullish (Fundamental Analysis), bearish (Sentiment Analysis), bearish (Valuation Analysis)</td>
-                        <td><ul><li>The risk management signal mandates a 'hold' action due to high risk metrics, which overrides other signals</li><li>Valuation analysis strongly indicates a bearish outlook, suggesting the stock is overvalued</li><li>Fundamental analysis shows limited bullishness but lacks strong support from growth or profitability metrics</li><li>Technical analysis is neutral, providing no clear timing insight</li><li>Sentiment analysis is bearish, aligning with the valuation signal</li><li>Overall, the constraints and bearish valuation and sentiment signals justify holding without taking a position.</li></ul></td>
+                        <td class="confidence-high">100.0%</td>
+                        <td>bearish (Valuation Analysis), bullish (Fundamental Analysis), neutral (Technical Analysis), bearish (Sentiment Analysis), hold (Risk Management)</td>
+                        <td><ul><li>The Risk Management constraint mandates a 'hold' action due to high risk scores and market conditions</li><li>Despite the Fundamental Analysis showing a bullish signal, the Valuation Analysis is strongly bearish, indicating the price does not offer a good entry point</li><li>Technical Analysis is neutral, providing no strong signal for timing, while Sentiment Analysis is bearish</li><li>Therefore, adhering to the risk management directive, the decision is to hold with no change in position.</li></ul></td>
                     </tr>
                     
                     <tr>
                         <td><strong>QUBT</strong></td>
                         <td class="neutral">hold</td>
                         <td class="">35.0%</td>
-                        <td>bearish (Valuation Analysis), bullish (Fundamental Analysis), bullish (Technical Analysis), bullish (Sentiment Analysis)</td>
-                        <td><ul><li>The risk management directive to 'hold' is a hard constraint that must be followed</li><li>Despite the bullish signals from technical and sentiment analyses, the valuation analysis is strongly bearish, indicating the price is overvalued</li><li>Fundamental analysis is mixed but provides some bullish signals due to financial health</li><li>However, due to the valuation concerns and the risk management holding directive, we must hold our position.</li></ul></td>
+                        <td>bullish (Technical Analysis), bullish (Fundamental Analysis), bullish (Sentiment Analysis), bearish (Valuation Analysis), hold (Risk Management)</td>
+                        <td><ul><li>The risk management constraints dictate a 'hold' action due to a high risk score, despite the bullish signals from technical, fundamental, and sentiment analyses</li><li>The bearish valuation signal with high confidence suggests the stock is overvalued, further supporting the decision to hold</li><li>The overall confidence in the decision is low due to mixed signals.</li></ul></td>
                     </tr>
                     
                     <tr>
                         <td><strong>RGTI</strong></td>
                         <td class="neutral">hold</td>
-                        <td class="confidence-high">100.0%</td>
-                        <td>neutral (Technical Analysis), bullish (Fundamental Analysis), bearish (Sentiment Analysis), bearish (Valuation Analysis), hold (Risk Management)</td>
-                        <td><ul><li>The Risk Management constraint mandates a hold action due to a risk score of 10/10, which is a hard constraint</li><li>Valuation Analysis shows a strong bearish signal with a confidence of 113%, heavily outweighing other signals</li><li>Despite a moderate bullish signal from Fundamental Analysis, the overall sentiment is bearish with 80% confidence, reinforcing the decision to hold</li><li>Technical Analysis is neutral and provides no strong timing signal, supporting the hold action</li><li>Given these factors, the decision is to hold with maximum confidence.</li></ul></td>
+                        <td class="">75.0%</td>
+                        <td>bearish (Valuation Analysis), bullish (Fundamental Analysis), neutral (Technical Analysis), bearish (Sentiment Analysis)</td>
+                        <td><ul><li>Risk management dictates a hold action due to the high risk score of 10, despite having available cash</li><li>Valuation analysis is strongly bearish with a confidence of 113%, indicating the stock is overvalued</li><li>Fundamental analysis shows mixed signals but leans bullish with a 50% confidence, primarily due to financial health and price ratios</li><li>Technical analysis is neutral with conflicting signals</li><li>Sentiment analysis is bearish with high confidence (80%)</li><li>Overall, the combination of these factors supports a hold decision with a confidence level of 0.75.</li></ul></td>
                     </tr>
                     
                     <tr>
                         <td><strong>IONQ</strong></td>
                         <td class="neutral">hold</td>
-                        <td class="">10.7%</td>
-                        <td>bullish (Technical Analysis), neutral (Fundamental Analysis), bearish (Sentiment Analysis), bearish (Valuation Analysis)</td>
-                        <td><ul><li>Risk management dictates a 'hold' action due to a high risk score and market risk concerns</li><li>Valuation and sentiment analysis both strongly indicate bearish signals with high confidence, suggesting the current price is not favorable for buying</li><li>Fundamental analysis provides no strong positive signals to counteract the bearish sentiment and valuation</li><li>Technical analysis, while slightly bullish, is not strong enough to outweigh the other factors</li><li>Overall confidence in a 'hold' decision is driven by the risk management directive and the bearish valuation and sentiment signals.</li></ul></td>
+                        <td class="">35.0%</td>
+                        <td>bearish (Valuation Analysis), neutral (Fundamental Analysis), bullish (Technical Analysis), bearish (Sentiment Analysis)</td>
+                        <td><ul><li>The risk management constraint mandates a 'hold' action, which takes precedence</li><li>The valuation analysis is strongly bearish with a confidence of 107%, indicating the stock is overvalued</li><li>Fundamental analysis is neutral, suggesting no compelling reason to buy or sell based on business quality</li><li>Technical analysis shows a bullish signal but with relatively low confidence (21%), which does not outweigh the stronger bearish signals</li><li>Sentiment is strongly bearish, further supporting the decision to hold</li><li>Overall, the combination of signals and risk constraints leads to a 'hold' with low confidence in any immediate action.</li></ul></td>
                     </tr>
                     
                 </table>
             </div>
             
             <div class="holdings-group">
-                <h3>Bitcoin Mining</h3>
+                <h3>Bitcoin</h3>
                 <table>
                     <tr>
                         <th>Ticker</th>
@@ -309,25 +309,25 @@
                     <tr>
                         <td><strong>MARA</strong></td>
                         <td class="neutral">hold</td>
-                        <td class="confidence-high">80.0%</td>
-                        <td>neutral (Technical Analysis), bullish (Fundamental Analysis), neutral (Sentiment Analysis), bearish (Valuation Analysis), hold (Risk Management)</td>
-                        <td><ul><li>The decision to hold is primarily driven by the risk management constraints, which dictate a 'hold' action due to a high-risk score</li><li>Valuation analysis, with a bearish signal and high confidence, further supports this decision as it suggests the stock is overvalued</li><li>Fundamental analysis provides a bullish view but is outweighed by the valuation concerns</li><li>Technical and sentiment analyses both present neutral signals, adding no strong directional bias</li><li>Thus, the combined signals and risk constraints lead to a 'hold' action with moderate confidence.</li></ul></td>
+                        <td class="">35.0%</td>
+                        <td>neutral (Technical Analysis), bullish (Fundamental Analysis), neutral (Sentiment Analysis), bearish (Valuation Analysis)</td>
+                        <td><ul><li>The risk management constraints mandate a hold action due to a high risk score and volatility</li><li>Despite a bullish signal from fundamental analysis, the bearish valuation analysis, which carries the most weight, supports the hold decision</li><li>The technical and sentiment analyses provide neutral signals and do not influence the decision significantly</li><li>Therefore, adhering to risk management, we maintain a hold position with a confidence level of 0.35, acknowledging the mixed signals and overriding risk constraints.</li></ul></td>
                     </tr>
                     
                     <tr>
                         <td><strong>RIOT</strong></td>
                         <td class="neutral">hold</td>
                         <td class="">50.0%</td>
-                        <td>bearish (Valuation Analysis), neutral (Fundamental Analysis), neutral (Technical Analysis), bearish (Sentiment Analysis)</td>
-                        <td><ul><li>The risk management directive is to hold, which is a hard constraint</li><li>Valuation analysis shows a strong bearish signal with high confidence, indicating overvaluation</li><li>Fundamental analysis is neutral, with mixed signals across profitability, growth, and financial health</li><li>Technical analysis provides no clear directional signal</li><li>Sentiment analysis is strongly bearish</li><li>Overall, the combination of valuation and sentiment signals with risk management constraints leads to a hold decision, adhering to risk constraints.</li></ul></td>
+                        <td>neutral (Technical Analysis), neutral (Fundamental Analysis), bearish (Sentiment Analysis), bearish (Valuation Analysis)</td>
+                        <td><ul><li>Risk management constraints dictate a hold action due to a high-risk score and market risk assessment</li><li>Valuation analysis strongly suggests bearish outlook with confidence of 113%, indicating that the price is overvalued</li><li>Fundamental analysis presents a mixed picture with overall neutrality, but profitability is a concern</li><li>Technical analysis signals are neutral, offering no confirmation for a buy or sell</li><li>Sentiment analysis is strongly bearish, reinforcing caution</li><li>Despite having cash available, the hold action must be adhered to per risk management guidance.</li></ul></td>
                     </tr>
                     
                     <tr>
                         <td><strong>MSTR</strong></td>
                         <td class="neutral">hold</td>
-                        <td class="">70.0%</td>
+                        <td class="">67.5%</td>
                         <td>bearish (Valuation Analysis), bearish (Fundamental Analysis), neutral (Technical Analysis), bearish (Sentiment Analysis)</td>
-                        <td><ul><li>Risk management mandates a hold action, which is consistent with the bearish signals from both valuation and sentiment analyses, indicating an unfavorable market condition</li><li>The technical analysis is neutral, providing no strong counter-signal</li><li>With the fundamental analysis also leaning bearish, the overall confidence in holding is moderated by these factors.</li></ul></td>
+                        <td><ul><li>The risk management constraint mandates a 'hold' action despite the strong bearish signals from valuation and sentiment analyses</li><li>Valuation analysis, which has the highest weight, is strongly bearish with a 100% confidence level, indicating significant overvaluation</li><li>Fundamental analysis is also bearish but with lower confidence</li><li>Technical analysis is neutral and does not provide a clear entry or exit signal</li><li>Sentiment is strongly bearish, reflecting negative market perception</li><li>However, given the risk management directive, we must hold.</li></ul></td>
                     </tr>
                     
                 </table>
@@ -347,17 +347,17 @@
                     <tr>
                         <td><strong>PLTR</strong></td>
                         <td class="neutral">hold</td>
-                        <td class="confidence-high">94.0%</td>
+                        <td class="">65.0%</td>
                         <td>bearish (Valuation Analysis), bullish (Fundamental Analysis), bullish (Technical Analysis), bearish (Sentiment Analysis)</td>
-                        <td><ul><li>The risk management constraints dictate a hold action, which is a hard constraint</li><li>The valuation analysis strongly signals bearishness with a high confidence of 94%, indicating the price is significantly overvalued</li><li>Fundamental analysis shows some bullishness with growth and financial health, but this is offset by poor price ratios</li><li>Technical signals are mildly bullish but not strong enough to offset the valuation concerns</li><li>Sentiment analysis is strongly bearish</li><li>Overall, the combined signals and risk management directive support a hold decision with high confidence.</li></ul></td>
+                        <td><ul><li>The risk management directive is to hold, which is a hard constraint</li><li>Valuation analysis is strongly bearish with a high confidence level of 94%</li><li>Despite a bullish signal from fundamental analysis, the confidence level is moderate at 50%</li><li>Technical analysis is bullish but has a low confidence of 33%</li><li>Sentiment analysis is bearish with full confidence</li><li>Overall, the bearish valuation and sentiment signals outweigh the bullish fundamental and technical signals, leading to a decision to hold.</li></ul></td>
                     </tr>
                     
                     <tr>
                         <td><strong>TSLA</strong></td>
                         <td class="neutral">hold</td>
-                        <td class="confidence-high">94.0%</td>
-                        <td>bearish (Valuation Analysis), bearish (Fundamental Analysis), bullish (Technical Analysis), bearish (Sentiment Analysis)</td>
-                        <td><ul><li>The risk management constraint dictates a 'hold' action due to a high risk score and volatile market conditions</li><li>Valuation analysis, which is the most significant factor, indicates a strong bearish signal with a high confidence of 94%, suggesting that the current market price is significantly overvalued</li><li>Fundamental analysis also supports a bearish outlook, highlighting concerns with growth and price ratios</li><li>Despite a bullish technical signal, its lower confidence and weight do not override the other bearish signals</li><li>Sentiment analysis further supports a bearish stance with high confidence</li><li>Adhering to risk management constraints and the overall bearish signals, the decision is to hold with no position taken.</li></ul></td>
+                        <td class="confidence-high">90.0%</td>
+                        <td>bullish (Technical Analysis), bearish (Fundamental Analysis), bearish (Sentiment Analysis), bearish (Valuation Analysis)</td>
+                        <td><ul><li>The risk management constraints dictate a 'hold' action, which is a hard constraint</li><li>Valuation analysis shows a strong bearish signal with 94% confidence, indicating the stock is overvalued</li><li>Fundamental analysis also leans bearish due to weak growth prospects</li><li>Technical analysis is slightly bullish but with low confidence and cannot outweigh other factors</li><li>Sentiment analysis is strongly bearish</li><li>Adhering to risk management, the overall decision is to hold, with a high confidence level due to alignment of valuation, fundamental, and sentiment signals.</li></ul></td>
                     </tr>
                     
                 </table>
@@ -378,8 +378,8 @@
                         <td><strong>RKLB</strong></td>
                         <td class="neutral">hold</td>
                         <td class="">35.0%</td>
-                        <td>bearish (Valuation Analysis), neutral (Fundamental Analysis), neutral (Technical Analysis), bullish (Sentiment Analysis)</td>
-                        <td><ul><li>The risk management constraint dictates a 'hold' action, despite any other signals</li><li>Valuation analysis is strongly bearish with a high confidence level, indicating an overvalued asset</li><li>Fundamental analysis is neutral, showing mixed signals in profitability and financial health</li><li>Technical analysis does not provide a clear direction, being neutral</li><li>Sentiment analysis is bullish but holds the least weight</li><li>Overall, the risk management constraint takes precedence, resulting in a 'hold' decision with no changes to position size.</li></ul></td>
+                        <td>neutral (Technical Analysis), neutral (Fundamental Analysis), bullish (Sentiment Analysis), bearish (Valuation Analysis)</td>
+                        <td><ul><li>The risk management constraint mandates a hold action, and thus overrides other signals</li><li>Despite the bearish valuation signal indicating overvaluation, and neutral fundamentals not providing strong long-term conviction, the sentiment is bullish</li><li>However, the risk score is high (10/10), suggesting significant market risk and volatility, necessitating a hold</li><li>The confidence in holding is based mainly on the valuation signal being strong and bearish, weighted at 35%.</li></ul></td>
                     </tr>
                     
                 </table>
@@ -399,17 +399,17 @@
                     <tr>
                         <td><strong>RCAT</strong></td>
                         <td class="neutral">hold</td>
-                        <td class="confidence-high">80.0%</td>
-                        <td>bullish (Technical Analysis), bearish (Fundamental Analysis), bearish (Sentiment Analysis), bearish (Valuation Analysis)</td>
-                        <td><ul><li>Risk management has mandated a 'hold' action due to a high risk score and significant bearish signals from valuation, fundamental, and sentiment analyses</li><li>Valuation analysis, with the highest weight, indicates a strong bearish signal, suggesting the stock is overvalued</li><li>Fundamental analysis also highlights poor business health</li><li>Although technical analysis is bullish, its weight is lower, and it cannot override risk management constraints</li><li>Therefore, the decision is to hold with a confidence level of 0.8.</li></ul></td>
+                        <td class="">0.0%</td>
+                        <td>bearish (Valuation Analysis), bearish (Fundamental Analysis), bullish (Technical Analysis), bearish (Sentiment Analysis)</td>
+                        <td><ul><li>Due to the risk management constraint of holding, no trades are permitted</li><li>Valuation and sentiment analyses are strongly bearish, indicating poor entry/exit points</li><li>Fundamental analysis suggests weak business quality, reinforcing a bearish outlook</li><li>Although technical analysis is slightly bullish, it cannot override the hold directive.</li></ul></td>
                     </tr>
                     
                     <tr>
                         <td><strong>AISP</strong></td>
                         <td class="neutral">hold</td>
-                        <td class="">35.0%</td>
-                        <td>neutral (Technical Analysis), bullish (Fundamental Analysis), bearish (Sentiment Analysis), bearish (Valuation Analysis)</td>
-                        <td><ul><li>The risk management signal recommends a 'hold' action due to a high risk score, overriding other signals</li><li>Valuation analysis strongly suggests the stock is overvalued, while fundamental analysis shows strong long-term potential</li><li>However, the bearish sentiment and neutral technical signals do not support an active buy action</li><li>Therefore, adhering to risk management, the decision is to hold with a low confidence due to conflicting signals.</li></ul></td>
+                        <td class="">0.0%</td>
+                        <td>bearish (Valuation Analysis), bullish (Fundamental Analysis), neutral (Technical Analysis), bearish (Sentiment Analysis)</td>
+                        <td><ul><li>According to risk management, the trading action is to hold</li><li>The valuation analysis is strongly bearish with a confidence of 153%, indicating that the stock is overvalued, which outweighs the bullish fundamental analysis with 75% confidence</li><li>Technical analysis is neutral, providing no strong entry or exit signals</li><li>Sentiment analysis is bearish with full confidence, further supporting a cautious stance</li><li>The combination of these signals, particularly the bearish valuation and risk management's hold recommendation, results in a decision to hold with no position taken.</li></ul></td>
                     </tr>
                     
                 </table>
@@ -430,8 +430,8 @@
                         <td><strong>APLD</strong></td>
                         <td class="neutral">hold</td>
                         <td class="">0.0%</td>
-                        <td>bearish (Valuation Analysis), neutral (Fundamental Analysis), neutral (Technical Analysis), bearish (Sentiment Analysis)</td>
-                        <td><ul><li>The risk management constraint mandates a hold position</li><li>The valuation analysis is strongly bearish, indicating a significant misalignment with intrinsic value</li><li>Fundamental analysis is neutral, showing mixed signals with negative profitability but some growth potential</li><li>Technical analysis is neutral, providing no clear timing signal</li><li>Sentiment analysis is bearish, further supporting a cautious stance</li><li>Overall, the high risk score and bearish valuation signal justify a hold decision.</li></ul></td>
+                        <td>neutral (Technical Analysis), neutral (Fundamental Analysis), bearish (Sentiment Analysis), bearish (Valuation Analysis), hold (Risk Management)</td>
+                        <td><ul><li>The risk management constraint mandates a 'hold' action, which must be followed</li><li>Valuation analysis is strongly bearish, indicating poor entry points</li><li>Fundamental analysis is neutral with conflicting signals</li><li>Sentiment analysis is bearish, and technical analysis is neutral, providing no strong entry or exit signal</li><li>Overall, confidence in any action is low, aligning with the risk management 'hold' directive.</li></ul></td>
                     </tr>
                     
                     <tr>
@@ -439,7 +439,7 @@
                         <td class="neutral">hold</td>
                         <td class="">73.0%</td>
                         <td>bearish (Valuation Analysis), bullish (Fundamental Analysis), neutral (Technical Analysis), bearish (Sentiment Analysis)</td>
-                        <td><ul><li>The risk management constraint mandates a hold action due to a high risk score, limiting trading actions</li><li>Valuation analysis is strongly bearish with a 73% confidence, indicating the stock is overvalued</li><li>Fundamental analysis is bullish with a 75% confidence, showing strong business quality and growth potential, but it cannot override the risk management directive</li><li>Technical analysis is neutral, providing no additional insight for timing</li><li>Sentiment analysis is bearish with full confidence, further supporting caution</li><li>Overall, the risk management's hold directive aligns with the majority bearish signals, leading to a hold decision with a confidence of 0.73.</li></ul></td>
+                        <td><ul><li>Risk management mandates holding due to high risk score</li><li>Valuation analysis indicates overvaluation with high confidence, outweighing bullish fundamental signals</li><li>Technical analysis is neutral, providing no strong entry/exit timing</li><li>Sentiment is bearish, reinforcing a cautious stance</li><li>Despite bullish fundamentals, the holding position is enforced by risk management constraints.</li></ul></td>
                     </tr>
                     
                 </table>
@@ -459,9 +459,9 @@
                     <tr>
                         <td><strong>MP</strong></td>
                         <td class="neutral">hold</td>
-                        <td class="">67.0%</td>
-                        <td>neutral (Technical Analysis), bearish (Fundamental Analysis), bearish (Sentiment Analysis), bearish (Valuation Analysis), hold (Risk Management)</td>
-                        <td><ul><li>The risk management signal dictates a 'hold' action due to high risk score and market conditions</li><li>Valuation, fundamental, and sentiment analyses all indicate bearish signals, suggesting poor entry conditions for buying</li><li>Technical analysis shows a neutral signal, offering no strong short-term buy signal</li><li>Given the risk constraints and aligned bearish sentiment across other analyses, holding is the prudent decision.</li></ul></td>
+                        <td class="">35.0%</td>
+                        <td>bearish (Valuation Analysis), bearish (Fundamental Analysis), neutral (Technical Analysis), bearish (Sentiment Analysis), hold (Risk Management)</td>
+                        <td><ul><li>The risk management signal mandates a 'hold' action with a high risk score of 10/10, limiting any buy or sell decision</li><li>Valuation analysis is strongly bearish, indicating overvaluation with a confidence of 106%</li><li>Fundamental analysis also leans bearish with poor profitability and growth metrics</li><li>Technical analysis is neutral, providing no strong entry/exit timing</li><li>Sentiment is bearish, corroborating the negative outlook</li><li>Despite the available cash, the risk management directive to hold takes precedence.</li></ul></td>
                     </tr>
                     
                 </table>
@@ -481,9 +481,9 @@
                     <tr>
                         <td><strong>SMR</strong></td>
                         <td class="neutral">hold</td>
-                        <td class="confidence-high">100.0%</td>
+                        <td class="confidence-high">80.0%</td>
                         <td>bearish (Valuation Analysis), bearish (Fundamental Analysis), neutral (Technical Analysis), bearish (Sentiment Analysis)</td>
-                        <td><ul><li>The risk management constraints indicate a 'hold' action due to a high risk score and volatility concerns</li><li>Valuation analysis is strongly bearish, indicating the stock is overvalued by a large margin</li><li>Fundamental analysis also supports a bearish outlook with poor profitability signals</li><li>Technical analysis is neutral and does not provide a compelling entry or exit point</li><li>Sentiment analysis is strongly bearish</li><li>Given the risk management directive and the predominantly bearish signals across the analyses, the appropriate action is to hold with a high confidence level.</li></ul></td>
+                        <td><ul><li>According to risk management constraints, the recommended action is to hold due to a high risk score and market volatility</li><li>The valuation analysis is strongly bearish, indicating significant overvaluation</li><li>Fundamental analysis is also bearish, showing poor profitability</li><li>Sentiment analysis is overwhelmingly bearish, further supporting a cautious stance</li><li>Technical signals are neutral, offering no compelling timing for a buy or sell</li><li>Given these signals, holding is the most prudent action.</li></ul></td>
                     </tr>
                     
                 </table>
@@ -503,9 +503,9 @@
                     <tr>
                         <td><strong>SERV</strong></td>
                         <td class="neutral">hold</td>
-                        <td class="confidence-high">80.0%</td>
-                        <td>neutral (Technical Analysis), bullish (Fundamental Analysis), bearish (Sentiment Analysis), bearish (Valuation Analysis)</td>
-                        <td><ul><li>The risk management constraint dictates a 'hold' action, which is a hard constraint</li><li>Valuation analysis is strongly bearish, suggesting poor entry conditions and outweighs the bullish fundamental analysis</li><li>Technical analysis is neutral and does not provide a strong entry or exit signal</li><li>Sentiment analysis is bearish, aligning with the valuation signal and further supporting a cautious approach</li><li>Overall, the decision is to hold with no trade execution at this time.</li></ul></td>
+                        <td class="">10.0%</td>
+                        <td>bearish (Valuation Analysis), bullish (Fundamental Analysis), neutral (Technical Analysis), bearish (Sentiment Analysis), hold (Risk Management)</td>
+                        <td><ul><li>Risk management mandates a hold action due to a high risk score, overriding other bullish or bearish inclinations</li><li>Valuation analysis shows strong bearish signals with a high confidence of 121%, indicating the price is above intrinsic value</li><li>Fundamental analysis is mixed but leans slightly bullish</li><li>Technical analysis is neutral and does not provide a clear entry or exit point</li><li>Sentiment is strongly bearish</li><li>The decision is to hold, as risk constraints are paramount, and there is no compelling evidence to act against them.</li></ul></td>
                     </tr>
                     
                 </table>
@@ -514,9 +514,9 @@
         </div>
 
         <div class="footer">
-            <img src="https://yeetum.com/favicon.ico" alt="Yeetum Logo">
-            <p>Generated by Eden Advisory</p>
-            <p>Report Date: 2024-12-28 13:54:33</p>
+            <img src="https://yeetum.com/favicon.ico" alt="Logo">
+            <p>Generated by Eden Advisory for select individuals</p>
+            <p>Report Date: 2024-12-28 14:14:48</p>
         </div>
     </div>
 </body>
