@@ -40,7 +40,7 @@ By using this software, you agree to use it solely for learning purposes.
 
 Clone the repository:
 ```bash
-git clone https://github.com/virattt/ai-hedge-fund.git
+git clone https://github.com/YIG-DAO/ai-hedge-fund.git
 cd ai-hedge-fund
 ```
 
