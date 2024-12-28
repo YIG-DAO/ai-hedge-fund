@@ -186,7 +186,7 @@ def send_email_report(recipients: List[str]) -> None:
     # Create message
     msg = MIMEMultipart('alternative')
     fund_config = load_fund_config()
-    msg['Subject'] = f"{fund_config['fund_name']} Holdings Analysis - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+    msg['Subject'] = f"{fund_config['fund_name']} Holdings Analysis - {datetime.now().strftime('%m/%d/%Y')}"
     msg['From'] = sender_email
     msg['To'] = ', '.join(recipients)
     
