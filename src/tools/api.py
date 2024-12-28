@@ -3,8 +3,6 @@ from typing import Dict, Any, List
 import pandas as pd
 import requests
 
-import requests
-
 def get_financial_metrics(
     ticker: str,
     report_period: str,
