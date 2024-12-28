@@ -173,10 +173,18 @@ ai-hedge-fund/
 │   │   ├── valuation.py          # Valuation analysis agent
 │   ├── tools/                    # Agent tools
 │   │   ├── api.py                # API tools
+│   │   ├── report.py             # Report generation tools
+│   │   ├── email.py              # Email sending utilities
 │   ├── backtester.py             # Backtesting tools
-│   ├── main.py # Main entry point
-├── pyproject.toml
-├── ...
+│   ├── main.py                   # Main entry point
+├── public/                       # Generated reports
+│   ├── report.html              # Single stock analysis report
+│   ├── fund_report.html         # Full fund analysis report
+├── fund.json                     # Fund holdings configuration
+├── fund_state.json              # Generated fund analysis state
+├── workflow.sh                   # Analysis workflow script
+├── pyproject.toml               # Project dependencies
+├── .env.example                 # Environment variables template
 ```
 
 ## Contributing
