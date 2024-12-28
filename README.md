@@ -11,9 +11,33 @@ This system employs several agents working together:
 5. Technical Analyst - Analyzes technical indicators and generates trading signals
 6. Risk Manager - Calculates risk metrics and sets position limits
 7. Portfolio Manager - Makes final trading decisions and generates orders
+8. Runs - on a set of holdings via `workflow.sh` on a `fund.json` file
+9. Can generate reports via `poetry run python src/tools/report.py` and email out via `poetry run python src/tools/report.py --email recipient@example.com`
 
-![Screenshot 2024-12-27 at 5 49 56 PM](https://github.com/user-attachments/assets/c281b8c3-d8e6-431e-a05e-d309d306e967)
-
+## AI Hedge Fund
+```mermaid
+flowchart LR
+    MD[Market Data Analyst] --> VA[Valuation Analyst] & SA[Sentiment Analyst] & FA[Fundamentals Analyst] & TA[Technical Analyst]
+    VA & SA & FA & TA --> RM[Risk Manager]
+    RM --> PM[Portfolio Manager]
+    
+    subgraph AI Agents
+        VA & SA & FA & TA & RM & PM
+    end
+    
+    PM --> Decision{{make trading decision}}
+    Decision --> Buy & Sell & Hold
+```
+## Holdings Analysis and Report Generation Flow
+```mermaid
+flowchart LR
+    Holdings[Current Holdings] --> Runner[Workflow Runner]
+    Runner --> VA2[Valuation Analysis] & SA2[Sentiment Analysis] & FA2[Fundamentals Analysis] & TA2[Technical Analysis]
+    VA2 & SA2 & FA2 & TA2 --> Report[Generate Holdings Report]
+    Report --> Email{Email Report?}
+    Email -->|Yes| SendEmail[Send Email Report]
+    Email -->|No| End[End Process]
+```
 Note: the system simulates trading decisions, it does not actually trade.
 
 ## Disclaimer
