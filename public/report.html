@@ -2,25 +2,25 @@
 <html>
 <head>
     <title>Fund Analysis Report</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        .charts-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
-        }
-        .chart-wrapper {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        :root {
+            --technical-color: #4BC0C0;
+            --fundamental-color: #FF6384;
+            --sentiment-color: #FFCE56;
+            --valuation-color: #9966FF;
+            --risk-color: #FF9F40;
+            --score-color: #36A2EB;
+            --bullish-color: #4CAF50;
+            --neutral-color: #9E9E9E;
+            --bearish-color: #F44336;
         }
         body { 
             font-family: Arial, sans-serif; 
-            margin: 40px;
+            margin: 0;
             line-height: 1.6;
             color: #333;
+            background-color: #f5f5f5;
         }
         .container { 
             max-width: 1200px; 
@@ -29,9 +29,11 @@
         }
         .header {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
             margin-bottom: 30px;
+            text-align: center;
         }
         .header img {
             width: 50px;
@@ -42,6 +44,7 @@
             border-collapse: collapse; 
             margin: 20px 0;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            background: white;
         }
         th, td { 
             padding: 12px; 
@@ -65,27 +68,41 @@
             flex-direction: column;
             align-items: center;
             gap: 10px;
+            background: white;
         }
         .footer img {
-            width: 30px;
-            height: 30px;
+            width: 60px;
+            height: 60px;
+            margin-bottom: 10px;
         }
-        .summary { 
-            background-color: #f9f9f9; 
-            padding: 20px; 
-            border-radius: 5px; 
-            margin: 20px 0;
-            border: 1px solid #eee;
+        .footer-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            margin: 10px 0;
         }
-        .error { color: #d32f2f; }
-        .bullish { color: #388e3c; }
-        .bearish { color: #d32f2f; }
-        .neutral { color: #757575; }
+        .footer-contact {
+            margin: 15px 0;
+        }
+        .footer-contact a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .footer-contact a:hover {
+            text-decoration: underline;
+        }
+        .technical { color: var(--technical-color); }
+        .fundamental { color: var(--fundamental-color); }
+        .sentiment { color: var(--sentiment-color); }
+        .valuation { color: var(--valuation-color); }
+        .bullish { color: var(--bullish-color); }
+        .neutral { color: var(--neutral-color); }
+        .bearish { color: var(--bearish-color); }
         .confidence-high { font-weight: bold; }
         .holdings-group {
             margin: 30px 0;
             padding: 20px;
-            background: #fff;
+            background: white;
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
@@ -93,26 +110,132 @@
             margin-top: 0;
             color: #2c3e50;
         }
-        .metrics {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
+        .signal-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
-        .metric-card {
-            padding: 15px;
+        .signal-list li {
+            margin: 5px 0;
+            padding: 3px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .signal-list li::before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        .signal-list li.technical::before { background-color: var(--technical-color); }
+        .signal-list li.fundamental::before { background-color: var(--fundamental-color); }
+        .signal-list li.sentiment::before { background-color: var(--sentiment-color); }
+        .signal-list li.valuation::before { background-color: var(--valuation-color); }
+        .reasoning-list {
+            list-style: disc;
+            padding-left: 20px;
+            margin: 0;
+        }
+        .reasoning-list li {
+            margin: 5px 0;
+            padding: 2px 0;
+        }
+        @media (max-width: 768px) {
+            body {
+                margin: 0;
+            }
+            .container {
+                padding: 10px;
+            }
+            .header h1 {
+                font-size: 1.5em;
+            }
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            th, td {
+                padding: 8px;
+            }
+        }
+        .legend-section {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            font-size: 0.95em;
+        }
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .legend-item {
             background: #f8f9fa;
+            padding: 12px;
             border-radius: 4px;
+            border-left: 4px solid;
+        }
+        .legend-item.technical { border-color: var(--technical-color); }
+        .legend-item.fundamental { border-color: var(--fundamental-color); }
+        .legend-item.sentiment { border-color: var(--sentiment-color); }
+        .legend-item.valuation { border-color: var(--valuation-color); }
+        .legend-item.risk { border-color: var(--risk-color); }
+        .legend-item.score { border-color: var(--score-color); }
+        .legend-item h4 {
+            margin: 0 0 8px 0;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1em;
+        }
+        .legend-item h4::before {
+            content: "";
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .legend-item.technical h4::before { background-color: var(--technical-color); }
+        .legend-item.fundamental h4::before { background-color: var(--fundamental-color); }
+        .legend-item.sentiment h4::before { background-color: var(--sentiment-color); }
+        .legend-item.valuation h4::before { background-color: var(--valuation-color); }
+        .legend-item.risk h4::before { background-color: var(--risk-color); }
+        .legend-item.score h4::before { background-color: var(--score-color); }
+        .legend-item p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+        .color-guide {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
             text-align: center;
         }
-        .metric-value {
-            font-size: 24px;
-            font-weight: bold;
-            margin: 10px 0;
+        .color-guide-items {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 10px;
         }
-        .metric-label {
-            color: #666;
-            font-size: 14px;
+        .color-guide-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9em;
+        }
+        .color-guide-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
         }
     </style>
 </head>
@@ -121,130 +244,6 @@
         <div class="header">
             <img src="https://yeetum.com/favicon.ico" alt="Yeetum Logo">
             <h1>{{ fund_name }}</h1>
-        </div>
-        
-        <div class="summary">
-            <h2>Executive Summary</h2>
-            <p>Analysis performed on {{ date }}</p>
-            <div class="metrics">
-                <div class="metric-card">
-                    <div class="metric-label">Successfully Analyzed</div>
-                    <div class="metric-value">{{ successful_analyses }}</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-label">Failed Analyses</div>
-                    <div class="metric-value">{{ failed_analyses }}</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-label">Total Holdings</div>
-                    <div class="metric-value">{{ total_holdings }}</div>
-                </div>
-            </div>
-            
-            <div class="charts-container">
-                <div class="chart-wrapper">
-                    <canvas id="sectorDistribution"></canvas>
-                </div>
-                <div class="chart-wrapper">
-                    <canvas id="positionActions"></canvas>
-                </div>
-                <div class="chart-wrapper">
-                    <canvas id="sectorSentiment"></canvas>
-                </div>
-            </div>
-
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    const visualizationData = JSON.parse('{{ visualizations|tojson|safe }}');
-                
-                // Sector Distribution Chart
-                new Chart(document.getElementById('sectorDistribution'), {
-                    type: 'pie',
-                    data: {
-                        labels: visualizationData.sector_distribution.labels,
-                        datasets: [{
-                            data: visualizationData.sector_distribution.data,
-                            backgroundColor: [
-                                '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF',
-                                '#FF9F40', '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'
-                            ]
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            title: {
-                                display: true,
-                                text: 'Holdings by Sector'
-                            }
-                        }
-                    }
-                });
-
-                // Position Actions Chart
-                new Chart(document.getElementById('positionActions'), {
-                    type: 'doughnut',
-                    data: {
-                        labels: visualizationData.position_actions.labels,
-                        datasets: [{
-                            data: visualizationData.position_actions.data,
-                            backgroundColor: ['#4BC0C0', '#FF6384', '#FFCE56']
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            title: {
-                                display: true,
-                                text: 'Position Actions'
-                            }
-                        }
-                    }
-                });
-
-                // Sector Sentiment Chart
-                new Chart(document.getElementById('sectorSentiment'), {
-                    type: 'bar',
-                    data: {
-                        labels: visualizationData.sector_sentiment.sectors,
-                        datasets: [
-                            {
-                                label: 'Bullish',
-                                data: visualizationData.sector_sentiment.bullish,
-                                backgroundColor: '#4BC0C0'
-                            },
-                            {
-                                label: 'Bearish',
-                                data: visualizationData.sector_sentiment.bearish,
-                                backgroundColor: '#FF6384'
-                            },
-                            {
-                                label: 'Neutral',
-                                data: visualizationData.sector_sentiment.neutral,
-                                backgroundColor: '#FFCE56'
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            title: {
-                                display: true,
-                                text: 'Sector Sentiment Analysis'
-                            }
-                        },
-                        scales: {
-                            x: {
-                                stacked: true
-                            },
-                            y: {
-                                stacked: true
-                            }
-                        }
-                    }
-                });
-                });
-            </script>
         </div>
 
         <div class="holdings-analysis">
@@ -264,8 +263,21 @@
                         <td><strong>{{ holding.ticker }}</strong></td>
                         <td class="{{ holding.signal_class }}">{{ holding.action }}</td>
                         <td class="{{ holding.confidence_class }}">{{ holding.confidence }}</td>
-                        <td>{{ holding.signals }}</td>
-                        <td>{{ holding.reasoning|safe }}</td>
+                        <td>
+                            <ul class="signal-list">
+                                <li class="technical">Technical: <span class="{{ holding.technical_signal_class }}">{{ holding.technical_signal }}</span></li>
+                                <li class="fundamental">Fundamental: <span class="{{ holding.fundamental_signal_class }}">{{ holding.fundamental_signal }}</span></li>
+                                <li class="sentiment">Sentiment: <span class="{{ holding.sentiment_signal_class }}">{{ holding.sentiment_signal }}</span></li>
+                                <li class="valuation">Valuation: <span class="{{ holding.valuation_signal_class }}">{{ holding.valuation_signal }}</span></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="reasoning-list">
+                                {{# for reason in holding.reasoning_points #}}
+                                <li>{{ reason }}</li>
+                                {{# endfor #}}
+                            </ul>
+                        </td>
                     </tr>
                     {{# endfor #}}
                 </table>
@@ -274,8 +286,65 @@
         </div>
 
         <div class="footer">
+            <div class="legend-section">
+                <h3>Analysis Types & Risk Parameters</h3>
+                <div class="legend-grid">
+                    <div class="legend-item technical">
+                        <h4>Technical Analysis</h4>
+                        <p>Studies price action, volume, and momentum indicators to identify market trends and potential entry/exit points.</p>
+                    </div>
+                    <div class="legend-item fundamental">
+                        <h4>Fundamental Analysis</h4>
+                        <p>Evaluates company financials, business model, competitive position, and growth prospects.</p>
+                    </div>
+                    <div class="legend-item sentiment">
+                        <h4>Sentiment Analysis</h4>
+                        <p>Measures market sentiment through news, social media, and institutional investor behavior.</p>
+                    </div>
+                    <div class="legend-item valuation">
+                        <h4>Valuation Analysis</h4>
+                        <p>Assesses fair value through metrics like P/E ratio, DCF analysis, and comparable company analysis.</p>
+                    </div>
+                    <div class="legend-item risk">
+                        <h4>Risk Parameters</h4>
+                        <p>• Volatility Thresholds: Moderate >20%, High >30%</p>
+                        <p>• Value at Risk (95%): Moderate <-2%, High <-3%</p>
+                        <p>• Max Drawdown: Moderate <-10%, Severe <-20%</p>
+                        <p>• Base Position Size: 25% of portfolio value</p>
+                    </div>
+                    <div class="legend-item score">
+                        <h4>Risk Score Components</h4>
+                        <p>• Market Risk (0-6 points)</p>
+                        <p>• Signal Confidence (<30% adds 4 points)</p>
+                        <p>• Signal Divergence (2 points if all differ)</p>
+                        <p>• Total Score: 0-10 (higher = more risk)</p>
+                    </div>
+                </div>
+                <div class="color-guide">
+                    <h4>Signal Type Reference</h4>
+                    <div class="color-guide-items">
+                        <div class="color-guide-item">
+                            <span class="color-guide-dot" style="background-color: var(--bullish-color);"></span>
+                            <span>Bullish</span>
+                        </div>
+                        <div class="color-guide-item">
+                            <span class="color-guide-dot" style="background-color: var(--neutral-color);"></span>
+                            <span>Neutral</span>
+                        </div>
+                        <div class="color-guide-item">
+                            <span class="color-guide-dot" style="background-color: var(--bearish-color);"></span>
+                            <span>Bearish</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <img src="https://yeetum.com/favicon.ico" alt="Logo">
-            <p>Generated by Eden Advisory for select individuals</p>
+            <div class="footer-title">Yeetum Intelligence Platform</div>
+            <div class="footer-subtitle">Reindustrialization Holdings Analysis Service</div>
+            <div class="footer-contact">
+                Contact for custom analysis @ <a href="https://yeetum.com/contact">yeetum.com/contact</a>
+            </div>
             <p>Report Date: {{ date }}</p>
         </div>
     </div>

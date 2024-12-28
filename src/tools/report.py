@@ -95,12 +95,43 @@ def prepare_template_data() -> Dict[str, Any]:
             if ticker in fund_state['holdings']:
                 successful_analyses += 1
                 holding_data = fund_state['holdings'][ticker]
+                # Process agent signals
+                agent_signals = holding_data.get('agent_signals', [])
+                signals = {
+                    'technical': {'signal': 'N/A', 'confidence': 0},
+                    'fundamental': {'signal': 'N/A', 'confidence': 0},
+                    'sentiment': {'signal': 'N/A', 'confidence': 0},
+                    'valuation': {'signal': 'N/A', 'confidence': 0}
+                }
+                
+                for signal in agent_signals:
+                    agent = signal.get('agent', signal.get('agent_name', '')).lower()
+                    if 'technical' in agent:
+                        signals['technical'] = {'signal': signal['signal'], 'confidence': signal['confidence']}
+                    elif 'fundamental' in agent:
+                        signals['fundamental'] = {'signal': signal['signal'], 'confidence': signal['confidence']}
+                    elif 'sentiment' in agent:
+                        signals['sentiment'] = {'signal': signal['signal'], 'confidence': signal['confidence']}
+                    elif 'valuation' in agent:
+                        signals['valuation'] = {'signal': signal['signal'], 'confidence': signal['confidence']}
+
+                # Process reasoning into bullet points
+                reasoning_text = holding_data.get('reasoning', 'No reasoning available')
+                reasoning_points = [point.strip() for point in reasoning_text.split('.') if point.strip()]
+
                 holdings.append({
                     'ticker': ticker,
                     'action': holding_data.get('action', 'N/A'),
                     'confidence': format_confidence(holding_data.get('confidence', 0)),
-                    'signals': ', '.join(f"{s.get('signal', 'N/A')} ({s.get('agent_name', s.get('agent', 'Unknown'))})" for s in holding_data.get('agent_signals', [])),
-                    'reasoning': '<ul>' + ''.join(f'<li>{point}</li>' for point in holding_data.get('reasoning', 'No reasoning available').split('. ')) + '</ul>',
+                    'technical_signal': signals['technical']['signal'],
+                    'technical_signal_class': signals['technical']['signal'],
+                    'fundamental_signal': signals['fundamental']['signal'],
+                    'fundamental_signal_class': signals['fundamental']['signal'],
+                    'sentiment_signal': signals['sentiment']['signal'],
+                    'sentiment_signal_class': signals['sentiment']['signal'],
+                    'valuation_signal': signals['valuation']['signal'],
+                    'valuation_signal_class': signals['valuation']['signal'],
+                    'reasoning_points': reasoning_points,
                     'signal_class': get_signal_class(holding_data.get('action', '')),
                     'confidence_class': get_confidence_class(holding_data.get('confidence', 0))
                 })
@@ -154,7 +185,8 @@ def send_email_report(recipients: List[str]) -> None:
     
     # Create message
     msg = MIMEMultipart('alternative')
-    msg['Subject'] = f"Fund Analysis Report - {datetime.now().strftime('%Y-%m-%d')}"
+    fund_config = load_fund_config()
+    msg['Subject'] = f"{fund_config['fund_name']} Holdings Analysis - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
     msg['From'] = sender_email
     msg['To'] = ', '.join(recipients)
     
