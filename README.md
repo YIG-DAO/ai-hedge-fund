@@ -89,6 +89,55 @@ poetry run python src/main.py --ticker AAPL --start-date 2024-01-01 --end-date 2
 poetry run python src/backtester.py --ticker AAPL
 ```
 
+### Fund Analysis Workflow
+
+The project includes a workflow system for analyzing multiple holdings and generating reports:
+
+1. Run analysis on all fund holdings:
+```bash
+./workflow.sh
+```
+This will:
+- Process all tickers from fund.json
+- Generate fund_state.json with analysis results
+- Track successful and failed analyses
+
+2. Generate HTML report:
+```bash
+poetry run python src/tools/report.py
+```
+This creates a formatted HTML report in public/fund_report.html
+
+3. Send report via email:
+```bash
+poetry run python src/tools/report.py --email recipient@example.com
+```
+
+#### Email Configuration
+
+To use the email functionality:
+
+1. Update your .env file with email settings:
+```
+SMTP_SERVER=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USERNAME=your_email@gmail.com
+SMTP_PASSWORD=your_app_specific_password
+SENDER_EMAIL=your_email@gmail.com
+```
+
+For Gmail:
+- Use an App Password instead of your regular password
+- Enable 2-factor authentication
+- Generate an App Password at: Google Account → Security → 2-Step Verification → App passwords
+
+The HTML report includes:
+- Executive summary with analysis metrics
+- Holdings grouped by category
+- Action signals and confidence levels
+- Color-coded indicators for buy/sell signals
+- Detailed reasoning for each decision
+
 **Example Output:**
 ```
 Starting backtest...

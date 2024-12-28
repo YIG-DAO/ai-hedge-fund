@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fund Analysis Report</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .charts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .chart-wrapper {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 40px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .header img {
+            width: 50px;
+            height: 50px;
+        }
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        th, td { 
+            padding: 12px; 
+            text-align: left; 
+            border-bottom: 1px solid #ddd;
+        }
+        th { 
+            background-color: #f5f5f5;
+            font-weight: 600;
+        }
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+        .footer { 
+            margin-top: 40px; 
+            text-align: center; 
+            color: #666;
+            padding: 20px;
+            border-top: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer img {
+            width: 30px;
+            height: 30px;
+        }
+        .summary { 
+            background-color: #f9f9f9; 
+            padding: 20px; 
+            border-radius: 5px; 
+            margin: 20px 0;
+            border: 1px solid #eee;
+        }
+        .error { color: #d32f2f; }
+        .bullish { color: #388e3c; }
+        .bearish { color: #d32f2f; }
+        .neutral { color: #757575; }
+        .confidence-high { font-weight: bold; }
+        .holdings-group {
+            margin: 30px 0;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .holdings-group h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .metric-card {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .metric-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .metric-label {
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://yeetum.com/favicon.ico" alt="Yeetum Logo">
+            <h1>Reindustrialization Equity Fund</h1>
+        </div>
+        
+        <div class="summary">
+            <h2>Executive Summary</h2>
+            <p>Analysis performed on 2024-12-28 13:54:33</p>
+            <div class="metrics">
+                <div class="metric-card">
+                    <div class="metric-label">Successfully Analyzed</div>
+                    <div class="metric-value">17</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Failed Analyses</div>
+                    <div class="metric-value">5</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Total Holdings</div>
+                    <div class="metric-value">22</div>
+                </div>
+            </div>
+            
+            <div class="charts-container">
+                <div class="chart-wrapper">
+                    <canvas id="sectorDistribution"></canvas>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="positionActions"></canvas>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="sectorSentiment"></canvas>
+                </div>
+            </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const visualizationData = JSON.parse('{"position_actions": {"data": [0, 0, 17], "labels": ["buy", "sell", "hold"]}, "sector_distribution": {"data": [4, 4, 2, 1, 3, 1, 2, 1, 3, 1], "labels": ["Quantum Computing", "Bitcoin Mining", "Deep Tech \u0026 AI", "Space Technology", "Drone Technology", "Oil \u0026 Gas", "Data Center \u0026 AI", "Rare Earth Metals", "Nuclear Energy", "Robotics"]}, "sector_sentiment": {"bearish": [7, 6, 5, 1, 5, 0, 4, 3, 3, 2], "bullish": [6, 1, 3, 1, 2, 0, 1, 0, 0, 1], "neutral": [3, 5, 0, 2, 1, 0, 3, 1, 1, 1], "sectors": ["Quantum Computing", "Bitcoin Mining", "Deep Tech \u0026 AI", "Space Technology", "Drone Technology", "Oil \u0026 Gas", "Data Center \u0026 AI", "Rare Earth Metals", "Nuclear Energy", "Robotics"]}}');
+                
+                // Sector Distribution Chart
+                new Chart(document.getElementById('sectorDistribution'), {
+                    type: 'pie',
+                    data: {
+                        labels: visualizationData.sector_distribution.labels,
+                        datasets: [{
+                            data: visualizationData.sector_distribution.data,
+                            backgroundColor: [
+                                '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF',
+                                '#FF9F40', '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Holdings by Sector'
+                            }
+                        }
+                    }
+                });
+
+                // Position Actions Chart
+                new Chart(document.getElementById('positionActions'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: visualizationData.position_actions.labels,
+                        datasets: [{
+                            data: visualizationData.position_actions.data,
+                            backgroundColor: ['#4BC0C0', '#FF6384', '#FFCE56']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Position Actions'
+                            }
+                        }
+                    }
+                });
+
+                // Sector Sentiment Chart
+                new Chart(document.getElementById('sectorSentiment'), {
+                    type: 'bar',
+                    data: {
+                        labels: visualizationData.sector_sentiment.sectors,
+                        datasets: [
+                            {
+                                label: 'Bullish',
+                                data: visualizationData.sector_sentiment.bullish,
+                                backgroundColor: '#4BC0C0'
+                            },
+                            {
+                                label: 'Bearish',
+                                data: visualizationData.sector_sentiment.bearish,
+                                backgroundColor: '#FF6384'
+                            },
+                            {
+                                label: 'Neutral',
+                                data: visualizationData.sector_sentiment.neutral,
+                                backgroundColor: '#FFCE56'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Sector Sentiment Analysis'
+                            }
+                        },
+                        scales: {
+                            x: {
+                                stacked: true
+                            },
+                            y: {
+                                stacked: true
+                            }
+                        }
+                    }
+                });
+                });
+            </script>
+        </div>
+
+        <div class="holdings-analysis">
+            
+            <div class="holdings-group">
+                <h3>Quantum Computing</h3>
+                <table>
+                    <tr>
+                        <th>Ticker</th>
+                        <th>Action</th>
+                        <th>Confidence</th>
+                        <th>Signals</th>
+                        <th>Reasoning</th>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QBTS</strong></td>
+                        <td class="neutral">hold</td>
+                        <td class="">35.0%</td>
+                        <td>neutral (Technical Analysis), bullish (Fundamental Analysis), bearish (Sentiment Analysis), bearish (Valuation Analysis)</td>
+                        <td><ul><li>The risk management signal mandates a 'hold' action due to high risk metrics, which overrides other signals</li><li>Valuation analysis strongly indicates a bearish outlook, suggesting the stock is overvalued</li><li>Fundamental analysis shows limited bullishness but lacks strong support from growth or profitability metrics</li><li>Technical analysis is neutral, providing no clear timing insight</li><li>Sentiment analysis is bearish, aligning with the valuation signal</li><li>Overall, the constraints and bearish valuation and sentiment signals justify holding without taking a position.</li></ul></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUBT</strong></td>
+                        <td class="neutral">hold</td>
+                        <td class="">35.0%</td>
+                        <td>bearish (Valuation Analysis), bullish (Fundamental Analysis), bullish (Technical Analysis), bullish (Sentiment Analysis)</td>
+                        <td><ul><li>The risk management directive to 'hold' is a hard constraint that must be followed</li><li>Despite the bullish signals from technical and sentiment analyses, the valuation analysis is strongly bearish, indicating the price is overvalued</li><li>Fundamental analysis is mixed but provides some bullish signals due to financial health</li><li>However, due to the valuation concerns and the risk management holding directive, we must hold our position.</li></ul></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>RGTI</strong></td>
+                        <td class="neutral">hold</td>
+                        <td class="confidence-high">100.0%</td>
+                        <td>neutral (Technical Analysis), bullish (Fundamental Analysis), bearish (Sentiment Analysis), bearish (Valuation Analysis), hold (Risk Management)</td>
+                        <td><ul><li>The Risk Management constraint mandates a hold action due to a risk score of 10/10, which is a hard constraint</li><li>Valuation Analysis shows a strong bearish signal with a confidence of 113%, heavily outweighing other signals</li><li>Despite a moderate bullish signal from Fundamental Analysis, the overall sentiment is bearish with 80% confidence, reinforcing the decision to hold</li><li>Technical Analysis is neutral and provides no strong timing signal, supporting the hold action</li><li>Given these factors, the decision is to hold with maximum confidence.</li></ul></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>IONQ</strong></td>
+                        <td class="neutral">hold</td>
+                        <td class="">10.7%</td>
+                        <td>bullish (Technical Analysis), neutral (Fundamental Analysis), bearish (Sentiment Analysis), bearish (Valuation Analysis)</td>
+                        <td><ul><li>Risk management dictates a 'hold' action due to a high risk score and market risk concerns</li><li>Valuation and sentiment analysis both strongly indicate bearish signals with high confidence, suggesting the current price is not favorable for buying</li><li>Fundamental analysis provides no strong positive signals to counteract the bearish sentiment and valuation</li><li>Technical analysis, while slightly bullish, is not strong enough to outweigh the other factors</li><li>Overall confidence in a 'hold' decision is driven by the risk management directive and the bearish valuation and sentiment signals.</li></ul></td>
+                    </tr>
+                    
+                </table>
+            </div>
+            
+            <div class="holdings-group">
+                <h3>Bitcoin Mining</h3>
+                <table>
+                    <tr>
+                        <th>Ticker</th>
+                        <th>Action</th>
+                        <th>Confidence</th>
+                        <th>Signals</th>
+                        <th>Reasoning</th>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>MARA</strong></td>
+                        <td class="neutral">hold</td>
+                        <td class="confidence-high">80.0%</td>
+                        <td>neutral (Technical Analysis), bullish (Fundamental Analysis), neutral (Sentiment Analysis), bearish (Valuation Analysis), hold (Risk Management)</td>
+                        <td><ul><li>The decision to hold is primarily driven by the risk management constraints, which dictate a 'hold' action due to a high-risk score</li><li>Valuation analysis, with a bearish signal and high confidence, further supports this decision as it suggests the stock is overvalued</li><li>Fundamental analysis provides a bullish view but is outweighed by the valuation concerns</li><li>Technical and sentiment analyses both present neutral signals, adding no strong directional bias</li><li>Thus, the combined signals and risk constraints lead to a 'hold' action with moderate confidence.</li></ul></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>RIOT</strong></td>
+                        <td class="neutral">hold</td>
+                        <td class="">50.0%</td>
+                        <td>bearish (Valuation Analysis), neutral (Fundamental Analysis), neutral (Technical Analysis), bearish (Sentiment Analysis)</td>
+                        <td><ul><li>The risk management directive is to hold, which is a hard constraint</li><li>Valuation analysis shows a strong bearish signal with high confidence, indicating overvaluation</li><li>Fundamental analysis is neutral, with mixed signals across profitability, growth, and financial health</li><li>Technical analysis provides no clear directional signal</li><li>Sentiment analysis is strongly bearish</li><li>Overall, the combination of valuation and sentiment signals with risk management constraints leads to a hold decision, adhering to risk constraints.</li></ul></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>MSTR</strong></td>
+                        <td class="neutral">hold</td>
+                        <td class="">70.0%</td>
+                        <td>bearish (Valuation Analysis), bearish (Fundamental Analysis), neutral (Technical Analysis), bearish (Sentiment Analysis)</td>
+                        <td><ul><li>Risk management mandates a hold action, which is consistent with the bearish signals from both valuation and sentiment analyses, indicating an unfavorable market condition</li><li>The technical analysis is neutral, providing no strong counter-signal</li><li>With the fundamental analysis also leaning bearish, the overall confidence in holding is moderated by these factors.</li></ul></td>
+                    </tr>
+                    
+                </table>
+            </div>
+            
+            <div class="holdings-group">
+                <h3>Deep Tech & AI</h3>
+                <table>
+                    <tr>
+                        <th>Ticker</th>
+                        <th>Action</th>
+                        <th>Confidence</th>
+                        <th>Signals</th>
+                        <th>Reasoning</th>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>PLTR</strong></td>
+                        <td class="neutral">hold</td>
+                        <td class="confidence-high">94.0%</td>
+                        <td>bearish (Valuation Analysis), bullish (Fundamental Analysis), bullish (Technical Analysis), bearish (Sentiment Analysis)</td>
+                        <td><ul><li>The risk management constraints dictate a hold action, which is a hard constraint</li><li>The valuation analysis strongly signals bearishness with a high confidence of 94%, indicating the price is significantly overvalued</li><li>Fundamental analysis shows some bullishness with growth and financial health, but this is offset by poor price ratios</li><li>Technical signals are mildly bullish but not strong enough to offset the valuation concerns</li><li>Sentiment analysis is strongly bearish</li><li>Overall, the combined signals and risk management directive support a hold decision with high confidence.</li></ul></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TSLA</strong></td>
+                        <td class="neutral">hold</td>
+                        <td class="confidence-high">94.0%</td>
+                        <td>bearish (Valuation Analysis), bearish (Fundamental Analysis), bullish (Technical Analysis), bearish (Sentiment Analysis)</td>
+                        <td><ul><li>The risk management constraint dictates a 'hold' action due to a high risk score and volatile market conditions</li><li>Valuation analysis, which is the most significant factor, indicates a strong bearish signal with a high confidence of 94%, suggesting that the current market price is significantly overvalued</li><li>Fundamental analysis also supports a bearish outlook, highlighting concerns with growth and price ratios</li><li>Despite a bullish technical signal, its lower confidence and weight do not override the other bearish signals</li><li>Sentiment analysis further supports a bearish stance with high confidence</li><li>Adhering to risk management constraints and the overall bearish signals, the decision is to hold with no position taken.</li></ul></td>
+                    </tr>
+                    
+                </table>
+            </div>
+            
+            <div class="holdings-group">
+                <h3>Space Technology</h3>
+                <table>
+                    <tr>
+                        <th>Ticker</th>
+                        <th>Action</th>
+                        <th>Confidence</th>
+                        <th>Signals</th>
+                        <th>Reasoning</th>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>RKLB</strong></td>
+                        <td class="neutral">hold</td>
+                        <td class="">35.0%</td>
+                        <td>bearish (Valuation Analysis), neutral (Fundamental Analysis), neutral (Technical Analysis), bullish (Sentiment Analysis)</td>
+                        <td><ul><li>The risk management constraint dictates a 'hold' action, despite any other signals</li><li>Valuation analysis is strongly bearish with a high confidence level, indicating an overvalued asset</li><li>Fundamental analysis is neutral, showing mixed signals in profitability and financial health</li><li>Technical analysis does not provide a clear direction, being neutral</li><li>Sentiment analysis is bullish but holds the least weight</li><li>Overall, the risk management constraint takes precedence, resulting in a 'hold' decision with no changes to position size.</li></ul></td>
+                    </tr>
+                    
+                </table>
+            </div>
+            
+            <div class="holdings-group">
+                <h3>Drone Technology</h3>
+                <table>
+                    <tr>
+                        <th>Ticker</th>
+                        <th>Action</th>
+                        <th>Confidence</th>
+                        <th>Signals</th>
+                        <th>Reasoning</th>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>RCAT</strong></td>
+                        <td class="neutral">hold</td>
+                        <td class="confidence-high">80.0%</td>
+                        <td>bullish (Technical Analysis), bearish (Fundamental Analysis), bearish (Sentiment Analysis), bearish (Valuation Analysis)</td>
+                        <td><ul><li>Risk management has mandated a 'hold' action due to a high risk score and significant bearish signals from valuation, fundamental, and sentiment analyses</li><li>Valuation analysis, with the highest weight, indicates a strong bearish signal, suggesting the stock is overvalued</li><li>Fundamental analysis also highlights poor business health</li><li>Although technical analysis is bullish, its weight is lower, and it cannot override risk management constraints</li><li>Therefore, the decision is to hold with a confidence level of 0.8.</li></ul></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>AISP</strong></td>
+                        <td class="neutral">hold</td>
+                        <td class="">35.0%</td>
+                        <td>neutral (Technical Analysis), bullish (Fundamental Analysis), bearish (Sentiment Analysis), bearish (Valuation Analysis)</td>
+                        <td><ul><li>The risk management signal recommends a 'hold' action due to a high risk score, overriding other signals</li><li>Valuation analysis strongly suggests the stock is overvalued, while fundamental analysis shows strong long-term potential</li><li>However, the bearish sentiment and neutral technical signals do not support an active buy action</li><li>Therefore, adhering to risk management, the decision is to hold with a low confidence due to conflicting signals.</li></ul></td>
+                    </tr>
+                    
+                </table>
+            </div>
+            
+            <div class="holdings-group">
+                <h3>Data Center & AI</h3>
+                <table>
+                    <tr>
+                        <th>Ticker</th>
+                        <th>Action</th>
+                        <th>Confidence</th>
+                        <th>Signals</th>
+                        <th>Reasoning</th>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>APLD</strong></td>
+                        <td class="neutral">hold</td>
+                        <td class="">0.0%</td>
+                        <td>bearish (Valuation Analysis), neutral (Fundamental Analysis), neutral (Technical Analysis), bearish (Sentiment Analysis)</td>
+                        <td><ul><li>The risk management constraint mandates a hold position</li><li>The valuation analysis is strongly bearish, indicating a significant misalignment with intrinsic value</li><li>Fundamental analysis is neutral, showing mixed signals with negative profitability but some growth potential</li><li>Technical analysis is neutral, providing no clear timing signal</li><li>Sentiment analysis is bearish, further supporting a cautious stance</li><li>Overall, the high risk score and bearish valuation signal justify a hold decision.</li></ul></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>NVDA</strong></td>
+                        <td class="neutral">hold</td>
+                        <td class="">73.0%</td>
+                        <td>bearish (Valuation Analysis), bullish (Fundamental Analysis), neutral (Technical Analysis), bearish (Sentiment Analysis)</td>
+                        <td><ul><li>The risk management constraint mandates a hold action due to a high risk score, limiting trading actions</li><li>Valuation analysis is strongly bearish with a 73% confidence, indicating the stock is overvalued</li><li>Fundamental analysis is bullish with a 75% confidence, showing strong business quality and growth potential, but it cannot override the risk management directive</li><li>Technical analysis is neutral, providing no additional insight for timing</li><li>Sentiment analysis is bearish with full confidence, further supporting caution</li><li>Overall, the risk management's hold directive aligns with the majority bearish signals, leading to a hold decision with a confidence of 0.73.</li></ul></td>
+                    </tr>
+                    
+                </table>
+            </div>
+            
+            <div class="holdings-group">
+                <h3>Rare Earth Metals</h3>
+                <table>
+                    <tr>
+                        <th>Ticker</th>
+                        <th>Action</th>
+                        <th>Confidence</th>
+                        <th>Signals</th>
+                        <th>Reasoning</th>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>MP</strong></td>
+                        <td class="neutral">hold</td>
+                        <td class="">67.0%</td>
+                        <td>neutral (Technical Analysis), bearish (Fundamental Analysis), bearish (Sentiment Analysis), bearish (Valuation Analysis), hold (Risk Management)</td>
+                        <td><ul><li>The risk management signal dictates a 'hold' action due to high risk score and market conditions</li><li>Valuation, fundamental, and sentiment analyses all indicate bearish signals, suggesting poor entry conditions for buying</li><li>Technical analysis shows a neutral signal, offering no strong short-term buy signal</li><li>Given the risk constraints and aligned bearish sentiment across other analyses, holding is the prudent decision.</li></ul></td>
+                    </tr>
+                    
+                </table>
+            </div>
+            
+            <div class="holdings-group">
+                <h3>Nuclear Energy</h3>
+                <table>
+                    <tr>
+                        <th>Ticker</th>
+                        <th>Action</th>
+                        <th>Confidence</th>
+                        <th>Signals</th>
+                        <th>Reasoning</th>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SMR</strong></td>
+                        <td class="neutral">hold</td>
+                        <td class="confidence-high">100.0%</td>
+                        <td>bearish (Valuation Analysis), bearish (Fundamental Analysis), neutral (Technical Analysis), bearish (Sentiment Analysis)</td>
+                        <td><ul><li>The risk management constraints indicate a 'hold' action due to a high risk score and volatility concerns</li><li>Valuation analysis is strongly bearish, indicating the stock is overvalued by a large margin</li><li>Fundamental analysis also supports a bearish outlook with poor profitability signals</li><li>Technical analysis is neutral and does not provide a compelling entry or exit point</li><li>Sentiment analysis is strongly bearish</li><li>Given the risk management directive and the predominantly bearish signals across the analyses, the appropriate action is to hold with a high confidence level.</li></ul></td>
+                    </tr>
+                    
+                </table>
+            </div>
+            
+            <div class="holdings-group">
+                <h3>Robotics</h3>
+                <table>
+                    <tr>
+                        <th>Ticker</th>
+                        <th>Action</th>
+                        <th>Confidence</th>
+                        <th>Signals</th>
+                        <th>Reasoning</th>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SERV</strong></td>
+                        <td class="neutral">hold</td>
+                        <td class="confidence-high">80.0%</td>
+                        <td>neutral (Technical Analysis), bullish (Fundamental Analysis), bearish (Sentiment Analysis), bearish (Valuation Analysis)</td>
+                        <td><ul><li>The risk management constraint dictates a 'hold' action, which is a hard constraint</li><li>Valuation analysis is strongly bearish, suggesting poor entry conditions and outweighs the bullish fundamental analysis</li><li>Technical analysis is neutral and does not provide a strong entry or exit signal</li><li>Sentiment analysis is bearish, aligning with the valuation signal and further supporting a cautious approach</li><li>Overall, the decision is to hold with no trade execution at this time.</li></ul></td>
+                    </tr>
+                    
+                </table>
+            </div>
+            
+        </div>
+
+        <div class="footer">
+            <img src="https://yeetum.com/favicon.ico" alt="Yeetum Logo">
+            <p>Generated by Eden Advisory</p>
+            <p>Report Date: 2024-12-28 13:54:33</p>
+        </div>
+    </div>
+</body>
+</html>

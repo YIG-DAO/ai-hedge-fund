@@ -1,0 +1,76 @@
+{
+    "fund_name": "Reindustrialization Equity Fund Quantum",
+    "holdings": {
+      "quantum_computing": {
+        "name": "Quantum Computing",
+        "holdings": [
+          "QBTS",
+          "QUBT",
+          "RGTI",
+          "IONQ"
+        ]
+      },
+      "bitcoin_mining": {
+        "name": "Bitcoin",
+        "holdings": [
+          "MARA",
+          "RIOT",
+          "MSTR"
+        ]
+      },
+      "deep_tech_ai": {
+        "name": "Deep Tech & AI",
+        "holdings": [
+          "PLTR",
+          "TSLA"
+        ]
+      },
+      "space": {
+        "name": "Space Technology",
+        "holdings": [
+          "RKLB"
+        ]
+      },
+      "drone": {
+        "name": "Drone Technology",
+        "holdings": [
+          "RCAT",
+          "AISP",
+          "ACHR"
+        ]
+      },
+      "oil_and_gas": {
+        "name": "Oil & Gas",
+        "holdings": [
+          "XLE"
+        ]
+      },
+      "data_center_ai": {
+        "name": "Data Center & AI",
+        "holdings": [
+          "APLD",
+          "NVDA"
+        ]
+      },
+      "rare_earth": {
+        "name": "Rare Earth Metals",
+        "holdings": [
+          "MP"
+        ]
+      },
+      "nuclear": {
+        "name": "Nuclear Energy",
+        "holdings": [
+          "OKLO",
+          "NNE",
+          "SMR"
+        ]
+      },
+      "robotics": {
+        "name": "Robotics",
+        "holdings": [
+          "SERV"
+        ]
+      }
+    }
+  }
