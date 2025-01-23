@@ -22,7 +22,8 @@
         "name": "Deep Tech & AI",
         "holdings": [
           "PLTR",
-          "TSLA"
+          "TSLA",
+          "PDYN"
         ]
       },
       "space": {
@@ -55,7 +56,8 @@
       "rare_earth": {
         "name": "Rare Earth Metals",
         "holdings": [
-          "MP"
+          "MP",
+          "IDR"
         ]
       },
       "nuclear": {
@@ -69,7 +71,8 @@
       "robotics": {
         "name": "Robotics",
         "holdings": [
-          "SERV"
+          "SERV",
+          "KITT"
         ]
       }
     }

@@ -15,227 +15,193 @@
             --neutral-color: #9E9E9E;
             --bearish-color: #F44336;
         }
+        
         body { 
             font-family: Arial, sans-serif; 
             margin: 0;
             line-height: 1.6;
             color: #333;
-            background-color: #f5f5f5;
+            background: #f5f5f5;
         }
-        .container { 
-            max-width: 1200px; 
-            margin: 0 auto; 
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 20px;
         }
+
         .header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 30px;
             text-align: center;
+            margin-bottom: 30px;
         }
+
         .header img {
-            width: 50px;
             height: 50px;
-        }
-        table { 
-            width: 100%; 
-            border-collapse: collapse; 
-            margin: 20px 0;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            background: white;
-        }
-        th, td { 
-            padding: 12px; 
-            text-align: left; 
-            border-bottom: 1px solid #ddd;
-        }
-        th { 
-            background-color: #f5f5f5;
-            font-weight: 600;
-        }
-        tr:hover {
-            background-color: #f9f9f9;
-        }
-        .footer { 
-            margin-top: 40px; 
-            text-align: center; 
-            color: #666;
-            padding: 20px;
-            border-top: 1px solid #eee;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            background: white;
-        }
-        .footer img {
-            width: 60px;
-            height: 60px;
             margin-bottom: 10px;
         }
-        .footer-title {
+
+        .reindustrialization-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .reindustrialization-section h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .highlights-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .highlights-list li {
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-left: 4px solid var(--technical-color);
+            border-radius: 4px;
+        }
+
+        .holdings-analysis {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .holdings-group {
+            margin-bottom: 30px;
+        }
+
+        .holding-item {
+            border: 1px solid #eee;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+
+        .holding-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .holding-title {
             font-size: 1.2em;
             font-weight: bold;
-            color: #333;
-            margin: 10px 0;
         }
-        .footer-contact {
+
+        .holding-action {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .action-buy { background: var(--bullish-color); color: white; }
+        .action-sell { background: var(--bearish-color); color: white; }
+        .action-hold { background: var(--neutral-color); color: white; }
+
+        .signals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
             margin: 15px 0;
         }
-        .footer-contact a {
-            color: #0066cc;
-            text-decoration: none;
+
+        .signal-item {
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
         }
-        .footer-contact a:hover {
-            text-decoration: underline;
+
+        .signal-name {
+            font-weight: bold;
+            margin-bottom: 5px;
         }
-        .technical { color: var(--technical-color); }
-        .fundamental { color: var(--fundamental-color); }
-        .sentiment { color: var(--sentiment-color); }
-        .valuation { color: var(--valuation-color); }
-        .bullish { color: var(--bullish-color); }
-        .neutral { color: var(--neutral-color); }
-        .bearish { color: var(--bearish-color); }
-        .confidence-high { font-weight: bold; }
-        .holdings-group {
-            margin: 30px 0;
-            padding: 20px;
-            background: white;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .holdings-group h3 {
-            margin-top: 0;
-            color: #2c3e50;
-        }
-        .signal-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .signal-list li {
-            margin: 5px 0;
-            padding: 3px 0;
+
+        .signal-value {
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
         }
-        .signal-list li::before {
-            content: "";
-            display: inline-block;
-            width: 8px;
-            height: 8px;
+
+        .signal-dot {
+            width: 10px;
+            height: 10px;
+            margin-right: 5px;
             border-radius: 50%;
         }
-        .signal-list li.technical::before { background-color: var(--technical-color); }
-        .signal-list li.fundamental::before { background-color: var(--fundamental-color); }
-        .signal-list li.sentiment::before { background-color: var(--sentiment-color); }
-        .signal-list li.valuation::before { background-color: var(--valuation-color); }
-        .reasoning-list {
-            list-style: disc;
-            padding-left: 20px;
-            margin: 0;
+
+        .technical { background-color: var(--technical-color); }
+        .fundamental { background-color: var(--fundamental-color); }
+        .sentiment { background-color: var(--sentiment-color); }
+        .valuation { background-color: var(--valuation-color); }
+        .risk { background-color: var(--risk-color); }
+        .score { background-color: var(--score-color); }
+
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
         }
-        .reasoning-list li {
-            margin: 5px 0;
-            padding: 2px 0;
+
+        .legend-section h3 {
+            margin-bottom: 15px;
         }
-        @media (max-width: 768px) {
-            body {
-                margin: 0;
-            }
-            .container {
-                padding: 10px;
-            }
-            .header h1 {
-                font-size: 1.5em;
-            }
-            table {
-                display: block;
-                overflow-x: auto;
-                white-space: nowrap;
-            }
-            th, td {
-                padding: 8px;
-            }
-        }
-        .legend-section {
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-            margin: 20px 0;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            font-size: 0.95em;
-        }
+
         .legend-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 15px;
-            margin-top: 15px;
         }
+
         .legend-item {
-            background: #f8f9fa;
-            padding: 12px;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: white;
             border-radius: 4px;
-            border-left: 4px solid;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
-        .legend-item.technical { border-color: var(--technical-color); }
-        .legend-item.fundamental { border-color: var(--fundamental-color); }
-        .legend-item.sentiment { border-color: var(--sentiment-color); }
-        .legend-item.valuation { border-color: var(--valuation-color); }
-        .legend-item.risk { border-color: var(--risk-color); }
-        .legend-item.score { border-color: var(--score-color); }
-        .legend-item h4 {
-            margin: 0 0 8px 0;
-            color: #2c3e50;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 1em;
-        }
-        .legend-item h4::before {
-            content: "";
-            display: inline-block;
-            width: 10px;
-            height: 10px;
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
             border-radius: 50%;
         }
-        .legend-item.technical h4::before { background-color: var(--technical-color); }
-        .legend-item.fundamental h4::before { background-color: var(--fundamental-color); }
-        .legend-item.sentiment h4::before { background-color: var(--sentiment-color); }
-        .legend-item.valuation h4::before { background-color: var(--valuation-color); }
-        .legend-item.risk h4::before { background-color: var(--risk-color); }
-        .legend-item.score h4::before { background-color: var(--score-color); }
-        .legend-item p {
-            margin: 5px 0;
-            font-size: 0.9em;
+
+        .market-impact {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .color-guide {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
-            text-align: center;
-        }
-        .color-guide-items {
-            display: flex;
-            justify-content: center;
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 10px;
+            margin-top: 15px;
         }
-        .color-guide-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9em;
+
+        .impact-item {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            border-left: 4px solid var(--technical-color);
         }
-        .color-guide-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            display: inline-block;
+
+        .impact-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
         }
     </style>
 </head>
@@ -246,8 +212,33 @@
             <h1>Reindustrialization Equity Fund</h1>
         </div>
 
-        <div class="holdings-analysis">
+        <!-- Reindustrialization Impact Section -->
+        <div class="reindustrialization-section">
+            <h2>Reindustrialization Impact Analysis</h2>
+            <p>Trends data currently unavailable</p>
             
+            <h3>Market Impact Highlights</h3>
+            <ul class="highlights-list">
+                <li>No highlights available</li>
+            </ul>
+        </div>
+
+        <!-- Market Impact Analysis -->
+        <div class="market-impact">
+            <h2>Market Impact Analysis</h2>
+            <div class="impact-grid">
+                <div class="impact-item">
+                    <div class="impact-title">Sector Performance</div>
+                    <p>Analysis of how reindustrialization trends are affecting different market sectors and our fund's positioning.</p>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-title">Risk Assessment</div>
+                    <p>Evaluation of potential risks and opportunities in the current market environment.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="holdings-analysis">
             <div class="holdings-group">
                 <h3>Quantum Computing</h3>
                 <table>
@@ -439,7 +430,7 @@
                                 
                                 <li>Fundamental analysis presents a mixed picture with overall neutrality, but profitability is a concern</li>
                                 
-                                <li>Technical analysis signals are neutral, offering no confirmation for a buy or sell</li>
+                                <li>Technical analysis is neutral, providing no strong entry or exit signals</li>
                                 
                                 <li>Sentiment analysis is strongly bearish, reinforcing caution</li>
                                 

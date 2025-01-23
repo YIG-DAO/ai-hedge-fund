@@ -7,6 +7,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import jinja2
+from .perplexity_client import get_reindustrialization_trends
 
 def load_fund_state() -> Dict[str, Any]:
     """Load the fund state from JSON file."""
@@ -75,102 +76,81 @@ def prepare_visualization_data(fund_config: Dict[str, Any], fund_state: Dict[str
         }
     }
 
-def prepare_template_data() -> Dict[str, Any]:
+def prepare_template_data(trends: Dict[str, Any] = {}) -> Dict[str, Any]:
     """Prepare data for the HTML template."""
     fund_state = load_fund_state()
     fund_config = load_fund_config()
     
-    holdings_groups = []
-    successful_analyses = 0
-    failed_analyses = 0
-    total_holdings = 0
+    # Get holdings data
+    holdings = fund_state.get('holdings', {})
+    
+    # Count analyses
+    total_holdings = len(holdings)
+    successful_analyses = sum(1 for h in holdings.values() if h.get('action') != 'error')
+    failed_analyses = total_holdings - successful_analyses
     
     # Prepare visualization data
-    viz_data = prepare_visualization_data(fund_config, fund_state)
+    viz_data = {
+        'technical': {'bullish': 0, 'bearish': 0, 'neutral': 0},
+        'fundamental': {'bullish': 0, 'bearish': 0, 'neutral': 0},
+        'sentiment': {'bullish': 0, 'bearish': 0, 'neutral': 0},
+        'valuation': {'bullish': 0, 'bearish': 0, 'neutral': 0},
+    }
     
-    for category, data in fund_config['holdings'].items():
-        holdings = []
-        for ticker in data['holdings']:
-            total_holdings += 1
-            if ticker in fund_state['holdings']:
-                successful_analyses += 1
-                holding_data = fund_state['holdings'][ticker]
-                # Process agent signals
-                agent_signals = holding_data.get('agent_signals', [])
-                signals = {
-                    'technical': {'signal': 'N/A', 'confidence': 0},
-                    'fundamental': {'signal': 'N/A', 'confidence': 0},
-                    'sentiment': {'signal': 'N/A', 'confidence': 0},
-                    'valuation': {'signal': 'N/A', 'confidence': 0}
-                }
+    # Process holdings data
+    for holding_data in holdings.values():
+        for signal in holding_data.get('agent_signals', []):
+            agent_name = signal.get('agent', signal.get('agent_name', '')).lower()
+            if not agent_name:
+                continue
                 
-                for signal in agent_signals:
-                    agent = signal.get('agent', signal.get('agent_name', '')).lower()
-                    if 'technical' in agent:
-                        signals['technical'] = {'signal': signal['signal'], 'confidence': signal['confidence']}
-                    elif 'fundamental' in agent:
-                        signals['fundamental'] = {'signal': signal['signal'], 'confidence': signal['confidence']}
-                    elif 'sentiment' in agent:
-                        signals['sentiment'] = {'signal': signal['signal'], 'confidence': signal['confidence']}
-                    elif 'valuation' in agent:
-                        signals['valuation'] = {'signal': signal['signal'], 'confidence': signal['confidence']}
-
-                # Process reasoning into bullet points
-                reasoning_text = holding_data.get('reasoning', 'No reasoning available')
-                reasoning_points = [point.strip() for point in reasoning_text.split('.') if point.strip()]
-
-                holdings.append({
-                    'ticker': ticker,
-                    'action': holding_data.get('action', 'N/A'),
-                    'confidence': format_confidence(holding_data.get('confidence', 0)),
-                    'technical_signal': signals['technical']['signal'],
-                    'technical_signal_class': signals['technical']['signal'],
-                    'fundamental_signal': signals['fundamental']['signal'],
-                    'fundamental_signal_class': signals['fundamental']['signal'],
-                    'sentiment_signal': signals['sentiment']['signal'],
-                    'sentiment_signal_class': signals['sentiment']['signal'],
-                    'valuation_signal': signals['valuation']['signal'],
-                    'valuation_signal_class': signals['valuation']['signal'],
-                    'reasoning_points': reasoning_points,
-                    'signal_class': get_signal_class(holding_data.get('action', '')),
-                    'confidence_class': get_confidence_class(holding_data.get('confidence', 0))
-                })
-            else:
-                failed_analyses += 1
-        
-        if holdings:
-            holdings_groups.append({
-                'name': data['name'],
-                'holdings': holdings
-            })
+            # Extract the type of analysis from the agent name
+            agent_type = None
+            for key in viz_data.keys():
+                if key in agent_name:
+                    agent_type = key
+                    break
+                    
+            if agent_type:
+                signal_type = signal.get('signal', 'neutral').lower()
+                viz_data[agent_type][signal_type] = viz_data[agent_type].get(signal_type, 0) + 1
     
     return {
-        'fund_name': fund_config['fund_name'],
-        'date': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-        'holdings_groups': holdings_groups,
+        'fund_name': fund_config.get('fund_name', 'AI Hedge Fund'),
+        'holdings': holdings,
         'successful_analyses': successful_analyses,
         'failed_analyses': failed_analyses,
         'total_holdings': total_holdings,
-        'visualizations': viz_data
+        'visualizations': viz_data,
+        'trends': trends,
+        'date': datetime.now().strftime('%Y-%m-%d')
     }
 
-def render_html_report() -> str:
-    """Render the HTML report using the template."""
-    template_path = Path('public/report.html')
+def render_html_report(trends: Dict[str, Any] = {}, template_name: str = 'report.html') -> str:
+    """Render the HTML report using the template.
+    
+    Args:
+        trends: Dictionary containing reindustrialization trends data
+        template_name: Name of the template to use (report.html or fund_report.html)
+    """
+    template_path = Path(f'public/{template_name}')
     with open(template_path, 'r') as f:
         template_str = f.read()
     
-    # Create Jinja2 environment with custom delimiters to avoid conflicts
     env = jinja2.Environment(
         loader=jinja2.BaseLoader(),
+        autoescape=jinja2.select_autoescape(['html', 'xml']),
+        trim_blocks=True,
+        lstrip_blocks=True,
         variable_start_string='{{',
         variable_end_string='}}',
-        block_start_string='{{#',
-        block_end_string='#}}',
+        block_start_string='{%',
+        block_end_string='%}'
     )
     
     template = env.from_string(template_str)
-    return template.render(**prepare_template_data())
+    template_data = prepare_template_data(trends)
+    return template.render(**template_data)
 
 def send_email_report(recipients: List[str]) -> None:
     """Send the HTML report via email."""
@@ -186,13 +166,37 @@ def send_email_report(recipients: List[str]) -> None:
     # Create message
     msg = MIMEMultipart('alternative')
     fund_config = load_fund_config()
-    msg['Subject'] = f"{fund_config['fund_name']} Holdings Analysis - {datetime.now().strftime('%m/%d/%Y')}"
+    
+    # Get reindustrialization trends
+    try:
+        trends = get_reindustrialization_trends()
+    except Exception as e:
+        print(f"Warning: Failed to fetch reindustrialization trends: {e}")
+        trends = {
+            'summary': 'Reindustrialization trends data temporarily unavailable',
+            'highlights': ['Data fetch error - please check system logs']
+        }
+    
+    msg['Subject'] = f"Weekly Reindustrialization Newsletter - {datetime.now().strftime('%m/%d/%Y')}"
     msg['From'] = sender_email
     msg['To'] = ', '.join(recipients)
     
-    # Attach HTML report
-    html_content = render_html_report()
-    msg.attach(MIMEText(html_content, 'html'))
+    # Render both reports
+    main_report = render_html_report(trends, 'report.html')
+    fund_report = render_html_report(trends, 'fund_report.html')
+    
+    # Combine reports with a separator
+    combined_report = f"""
+    <div style="margin-bottom: 50px;">
+        {main_report}
+    </div>
+    <div style="border-top: 2px solid #eee; margin: 30px 0;"></div>
+    <div>
+        {fund_report}
+    </div>
+    """
+    
+    msg.attach(MIMEText(combined_report, 'html'))
     
     # Send email
     with smtplib.SMTP(smtp_server, smtp_port) as server:
