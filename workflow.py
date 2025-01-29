@@ -50,19 +50,28 @@ def process_ticker(ticker):
             
         # Extract the final result JSON block
         output_lines = result.stdout.split('\n')
-        for i, line in enumerate(output_lines):
-            if line.strip() == 'Final Result:' and i + 1 < len(output_lines):
-                try:
-                    return json.loads(output_lines[i + 1])
-                except json.JSONDecodeError:
-                    logger.error(f"Error parsing JSON result for {ticker}")
-                    return None
+        json_lines = []
+        found_final = False
+        for line in output_lines:
+            if 'Final Result:' in line:
+                found_final = True
+                continue
+            if found_final:
+                json_lines.append(line)
         
-        logger.error(f"No valid result found for {ticker}")
-        return None
-        
+        if not json_lines:
+            logger.error(f"Error parsing JSON result for {ticker}")
+            return None
+            
+        json_str = '\n'.join(json_lines)
+        try:
+            return json.loads(json_str)
+        except json.JSONDecodeError:
+            logger.error(f"Error parsing JSON result for {ticker}")
+            return None
+            
     except Exception as e:
-        logger.error(f"Error processing ticker {ticker}: {e}")
+        logger.error(f"Error processing {ticker}: {str(e)}")
         return None
 
 def distribute_reports():
@@ -95,7 +104,10 @@ def run_analysis():
         # Read tickers from fund.json
         with open('fund.json', 'r') as f:
             fund_data = json.load(f)
-            tickers = [ticker for holdings in fund_data['holdings'] for ticker in holdings['holdings']]
+            # Extract tickers from all categories
+            tickers = []
+            for category in fund_data['holdings'].values():
+                tickers.extend(category['holdings'])
         
         # Process tickers and collect results
         results = {}
@@ -131,6 +143,10 @@ def run_analysis():
 
 def main():
     """Initialize and start the scheduler."""
+    # Run analysis immediately at startup
+    logger.info("Running initial analysis at startup...")
+    run_analysis()
+    
     scheduler = BlockingScheduler()
     
     # Schedule the job to run every Monday at 6 AM CST
