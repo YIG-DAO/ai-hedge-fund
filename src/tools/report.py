@@ -177,11 +177,7 @@ def send_email_report(recipients: List[str]) -> None:
             'highlights': ['Data fetch error - please check system logs']
         }
     
-    msg['Subject'] = f"Weekly Reindustrialization Newsletter - {datetime.now().strftime('%m/%d/%Y')}"
-    msg['From'] = sender_email
-    msg['To'] = ', '.join(recipients)
-    
-    # Render both reports
+    # Generate the report only once and store it in a variable
     main_report = render_html_report(trends, 'report.html')
     fund_report = render_html_report(trends, 'fund_report.html')
     
@@ -196,13 +192,19 @@ def send_email_report(recipients: List[str]) -> None:
     </div>
     """
     
-    msg.attach(MIMEText(combined_report, 'html'))
-    
-    # Send email
-    with smtplib.SMTP(smtp_server, smtp_port) as server:
-        server.starttls()
-        server.login(smtp_username, smtp_password)
-        server.send_message(msg)
+    for recipient in recipients:
+        msg['Subject'] = f"Weekly Reindustrialization Newsletter - {datetime.now().strftime('%m/%d/%Y')}"
+        msg['From'] = sender_email
+        msg['To'] = recipient
+        
+        msg.attach(MIMEText(combined_report, 'html'))
+        
+        # Send email
+        with smtplib.SMTP(smtp_server, smtp_port) as server:
+            server.starttls()
+            server.login(smtp_username, smtp_password)
+            server.send_message(msg)
+        print(f"Report sent to: {recipient}")
 
 def generate_report() -> None:
     """Generate the HTML report and save it to a file."""
@@ -220,6 +222,5 @@ if __name__ == '__main__':
             print("Error: No email recipients provided")
             sys.exit(1)
         send_email_report(recipients)
-        print(f"Report sent to: {', '.join(recipients)}")
     else:
         generate_report()

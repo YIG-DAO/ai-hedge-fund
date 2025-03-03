@@ -1,4 +1,4 @@
-# AI Hedge Fund
+# Reindustrialization Newsletter
 
 An AI-powered hedge fund analysis and reporting system with a focus on reindustrialization trends.
 
@@ -13,7 +13,7 @@ An AI-powered hedge fund analysis and reporting system with a focus on reindustr
 ## Prerequisites
 
 - Python 3.11+
-- Docker and Docker Swarm
+- Poetry
 - PostgreSQL database
 - SMTP server for email delivery
 
@@ -21,8 +21,8 @@ An AI-powered hedge fund analysis and reporting system with a focus on reindustr
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/YIG-DAO/ai-hedge-fund.git
-cd ai-hedge-fund
+git clone https://github.com/YIG-DAO/reindustrialization-newsletter.git
+cd reindustrialization-newsletter
 ```
 
 2. Copy the environment file and configure your variables:
@@ -30,9 +30,9 @@ cd ai-hedge-fund
 cp .env.example .env
 ```
 
-3. Install dependencies:
+3. Install dependencies with Poetry:
 ```bash
-pip install -r requirements.txt
+poetry install
 ```
 
 ## Database Setup
@@ -86,6 +86,41 @@ The service runs automatically every Monday at 6 AM CST. The workflow:
 2. Retrieves active subscribers from PostgreSQL
 3. Generates and sends personalized reports
 4. Includes rate limiting (1 second between emails)
+
+## Usage
+
+### Run Commands
+
+1. Analyze a single ticker:
+```bash
+poetry run python src/main.py --ticker AAPL --show-reasoning
+```
+
+2. Run the complete workflow (process all tickers and send emails):
+```bash
+poetry run python workflow.py
+```
+
+3. Generate report without sending emails:
+```bash
+poetry run python -m src.tools.report
+```
+
+4. Send report to specific email(s):
+```bash
+poetry run python -m src.tools.report --email user@example.com
+```
+
+### Email Configuration
+
+To send emails, set these environment variables in your `.env` file:
+```
+SMTP_SERVER=smtp.example.com
+SMTP_PORT=587
+SMTP_USERNAME=your_username
+SMTP_PASSWORD=your_password
+SENDER_EMAIL=sender@example.com
+```
 
 ## Development
 

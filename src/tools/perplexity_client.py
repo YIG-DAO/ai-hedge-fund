@@ -17,7 +17,7 @@ def get_reindustrialization_trends() -> Dict[str, str]:
         },
         {
             "role": "user",
-            "content": "What are the latest trends, news, and upcoming developments in American reindustrialization? Focus on key initiatives, investments, and policy changes."
+            "content": "What are the latest trends, news, and upcoming developments in American reindustrialization? Focus on key initiatives, investments, and policy changes within the last month."
         }
     ]
 
