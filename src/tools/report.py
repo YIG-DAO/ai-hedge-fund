@@ -154,11 +154,18 @@ def render_html_report(trends: Dict[str, Any] = {}, template_name: str = 'report
 
 def send_email_report(recipients: List[str]) -> None:
     """Send the HTML report via email."""
+    # Load environment variables from .env file if dotenv is available
+    try:
+        import dotenv
+        dotenv.load_dotenv()
+    except ImportError:
+        pass
+        
     smtp_server = os.getenv('SMTP_SERVER')
     smtp_port = int(os.getenv('SMTP_PORT', '587'))
     smtp_username = os.getenv('SMTP_USERNAME')
     smtp_password = os.getenv('SMTP_PASSWORD')
-    sender_email = os.getenv('SENDER_EMAIL')
+    sender_email = os.getenv('SENDER_EMAIL') or os.getenv('SMTP_SENDER')
     
     if not all([smtp_server, smtp_username, smtp_password, sender_email]):
         raise ValueError("Missing required email configuration in environment variables")
@@ -216,11 +223,20 @@ def generate_report() -> None:
 
 if __name__ == '__main__':
     import sys
+    # Load environment variables early
+    try:
+        import dotenv
+        dotenv.load_dotenv()
+        print("Loaded environment variables from .env")
+    except ImportError:
+        print("Warning: python-dotenv not found, environment variables must be set manually")
+        
     if len(sys.argv) > 1 and sys.argv[1] == '--email':
         recipients = sys.argv[2:]
         if not recipients:
             print("Error: No email recipients provided")
             sys.exit(1)
+        print(f"Sending email to: {', '.join(recipients)}")
         send_email_report(recipients)
     else:
         generate_report()

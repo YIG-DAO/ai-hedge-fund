@@ -3,12 +3,12 @@
     "QBTS": {
       "action": "hold",
       "quantity": 0,
-      "confidence": 0.67,
+      "confidence": 0.35,
       "agent_signals": [
         {
-          "agent_name": "Technical Analysis",
-          "signal": "neutral",
-          "confidence": 0.0
+          "agent_name": "Valuation Analysis",
+          "signal": "bearish",
+          "confidence": 1.2
         },
         {
           "agent_name": "Fundamental Analysis",
@@ -16,22 +16,17 @@
           "confidence": 0.25
         },
         {
+          "agent_name": "Technical Analysis",
+          "signal": "neutral",
+          "confidence": 0.15
+        },
+        {
           "agent_name": "Sentiment Analysis",
           "signal": "bearish",
           "confidence": 1.0
-        },
-        {
-          "agent_name": "Valuation Analysis",
-          "signal": "bearish",
-          "confidence": 1.19
-        },
-        {
-          "agent_name": "Risk Management",
-          "signal": "hold",
-          "confidence": 1.0
         }
       ],
-      "reasoning": "The risk management signal mandates a hold action due to high risk scores and constraints, which takes precedence over other analysis. Valuation analysis is strongly bearish, indicating the stock is overvalued. Fundamental analysis is slightly bullish but not strong enough to override valuation concerns. Sentiment is bearish, aligning with holding or selling rather than buying. Given these signals, the best course of action is to hold, with a confidence primarily driven by risk management and valuation signals."
+      "reasoning": "The risk management constraints dictate a hold action, which must be followed. The valuation analysis is strongly bearish with a high confidence, indicating the stock is overvalued. Fundamental analysis is slightly bullish but with low confidence and neutral signals in key areas like growth and profitability. Technical analysis is neutral, providing no clear timing signal, while sentiment analysis is strongly bearish. Given the high risk environment and negative valuation and sentiment, maintaining a hold position aligns with both risk management and the aggregated signals, resulting in low confidence in taking any active position."
     },
     "QUBT": {
       "action": "hold",
@@ -39,9 +34,9 @@
       "confidence": 0.35,
       "agent_signals": [
         {
-          "agent": "Valuation Analysis",
+          "agent": "Technical Analysis",
           "signal": "bearish",
-          "confidence": 1.18
+          "confidence": 0.25
         },
         {
           "agent": "Fundamental Analysis",
@@ -49,50 +44,50 @@
           "confidence": 0.5
         },
         {
-          "agent": "Technical Analysis",
-          "signal": "neutral",
-          "confidence": 0.19
-        },
-        {
           "agent": "Sentiment Analysis",
           "signal": "bullish",
           "confidence": 1.0
+        },
+        {
+          "agent": "Valuation Analysis",
+          "signal": "bearish",
+          "confidence": 1.21
         }
       ],
-      "reasoning": "Risk management dictates a hold action. Despite the bullish sentiment and fundamental signals, the valuation analysis is strongly bearish, indicating that the asset is overvalued. Technical analysis is neutral and does not provide a strong entry or exit signal. Sentiment is bullish with high confidence but only has a minor weighting in the decision process. The hold decision aligns with risk management constraints and the mixed signals from other analyses."
+      "reasoning": "The risk management constraint mandates a 'hold' action, which is a hard constraint. Valuation analysis shows a strong bearish signal with high confidence (35% weight), indicating that the current price is overvalued. Fundamental analysis is bullish (30% weight), but with moderate confidence due to mixed signals in profitability and growth. Technical analysis leans bearish (25% weight), aligning with the valuation signal. Sentiment is bullish (10% weight), but cannot override the risk management hold action. Overall, despite mixed signals, the risk management directive takes precedence, leading to a 'hold' decision with confidence stemming primarily from the valuation assessment."
     },
     "RGTI": {
       "action": "hold",
       "quantity": 0,
-      "confidence": 0.1,
+      "confidence": 0.75,
       "agent_signals": [
         {
-          "agent_name": "Technical Analysis",
-          "signal": "neutral",
-          "confidence": "0%"
+          "agent_name": "Valuation Analysis",
+          "signal": "bearish",
+          "confidence": 1.34
         },
         {
           "agent_name": "Fundamental Analysis",
-          "signal": "bullish",
-          "confidence": "50%"
+          "signal": "bearish",
+          "confidence": 0.5
+        },
+        {
+          "agent_name": "Technical Analysis",
+          "signal": "bearish",
+          "confidence": 0.21
         },
         {
           "agent_name": "Sentiment Analysis",
           "signal": "bearish",
-          "confidence": "80%"
-        },
-        {
-          "agent_name": "Valuation Analysis",
-          "signal": "bearish",
-          "confidence": "126%"
+          "confidence": 0.8
         }
       ],
-      "reasoning": "The risk management constraint mandates a hold position due to a high-risk score. Valuation analysis strongly suggests a bearish outlook with high confidence, indicating the stock is overvalued. Despite a bullish signal from fundamental analysis, its confidence is moderate and overshadowed by valuation concerns. Technical analysis is neutral, offering no additional entry or exit signals. Sentiment analysis is bearish, reinforcing caution. Overall, the risk management directive to hold is aligned with the predominance of bearish signals."
+      "reasoning": "The risk management directive is to hold, which is a hard constraint. Valuation analysis strongly indicates that the stock is overvalued with bearish signals. Fundamentals show a weak business with negative profitability and growth, despite strong financial health. Technical analysis is slightly bearish, and sentiment is predominantly bearish. Given these factors, the decision is to hold, aligning with risk management guidance."
     },
     "IONQ": {
       "action": "hold",
       "quantity": 0,
-      "confidence": 0.5,
+      "confidence": 0.35,
       "agent_signals": [
         {
           "agent_name": "Valuation Analysis",
@@ -107,76 +102,81 @@
         {
           "agent_name": "Technical Analysis",
           "signal": "neutral",
-          "confidence": 0.09
+          "confidence": 0.16
         },
         {
           "agent_name": "Sentiment Analysis",
           "signal": "bullish",
           "confidence": 1.0
-        }
-      ],
-      "reasoning": "The decision to hold is driven by the risk management constraint that mandates a hold action. Valuation analysis, which has the highest weight, is strongly bearish due to significant overvaluation, suggesting poor entry points. Fundamental analysis is neutral overall but shows weak profitability and growth metrics, which does not support a buy decision. Technical analysis is neutral with mixed signals, offering no strong timing signal. Sentiment is bullish, but with only a 10% weight, it is insufficient to override the other signals or risk management constraints. Therefore, the action is to hold, with confidence tempered by mixed signals across different analyses."
-    },
-    "MARA": {
-      "action": "hold",
-      "quantity": 0,
-      "confidence": 0.58,
-      "agent_signals": [
-        {
-          "agent": "Valuation Analysis",
-          "signal": "bearish",
-          "confidence": 1.15
         },
         {
-          "agent": "Fundamental Analysis",
-          "signal": "bullish",
-          "confidence": 0.75
-        },
-        {
-          "agent": "Technical Analysis",
-          "signal": "neutral",
-          "confidence": 0.19
-        },
-        {
-          "agent": "Sentiment Analysis",
-          "signal": "bullish",
-          "confidence": 1.0
-        }
-      ],
-      "reasoning": "Risk Management mandates a 'hold' action due to high risk score (10/10) despite the available cash. Valuation analysis is strongly bearish (115% confidence), indicating the stock is overvalued. Fundamental analysis is bullish (75% confidence), suggesting strong business quality, but it is outweighed by valuation concerns. Technical analysis is neutral, and sentiment is bullish, but they have minimal impact due to the risk management constraint. Overall confidence in holding is moderate (58%) as valuation concerns are significant."
-    },
-    "RIOT": {
-      "action": "hold",
-      "quantity": 0,
-      "confidence": 0.65,
-      "agent_signals": [
-        {
-          "agent": "Technical Analysis",
-          "signal": "neutral",
-          "confidence": 0.19
-        },
-        {
-          "agent": "Fundamental Analysis",
-          "signal": "bullish",
-          "confidence": 0.75
-        },
-        {
-          "agent": "Sentiment Analysis",
-          "signal": "bullish",
-          "confidence": 0.75
-        },
-        {
-          "agent": "Valuation Analysis",
-          "signal": "bullish",
-          "confidence": 1.070422
-        },
-        {
-          "agent": "Risk Management",
+          "agent_name": "Risk Management",
           "signal": "hold",
           "confidence": 1.0
         }
       ],
-      "reasoning": "The risk management constraint mandates a 'hold' action due to a high-risk score and market volatility. Despite strong bullish signals from valuation (due to high owner earnings value) and fundamentals (strong growth and profitability), and supportive sentiment, the technical signal is neutral, and risk management constraints prevent any buying action. Therefore, the action is to hold with a focus on preserving current capital without exceeding risk limits."
+      "reasoning": "The risk management constraint mandates a hold action, which is a hard constraint that cannot be violated. Valuation analysis strongly suggests a bearish outlook due to overvaluation, which aligns with the hold decision. Fundamental analysis is neutral, indicating weak business quality but good financial health. Technical analysis is neutral, offering no strong entry or exit signal. Sentiment analysis is bullish but has the least weight in decision-making. Overall, the hold action is reinforced by risk management, with valuation concerns further supporting no active position."
+    },
+    "MARA": {
+      "action": "hold",
+      "quantity": 0,
+      "confidence": 0.1,
+      "agent_signals": [
+        {
+          "agent": "Technical Analysis",
+          "signal": "neutral",
+          "confidence": 0.14
+        },
+        {
+          "agent": "Fundamental Analysis",
+          "signal": "bullish",
+          "confidence": 0.75
+        },
+        {
+          "agent": "Sentiment Analysis",
+          "signal": "bearish",
+          "confidence": 1.0
+        },
+        {
+          "agent": "Valuation Analysis",
+          "signal": "bearish",
+          "confidence": 22.7
+        }
+      ],
+      "reasoning": "The risk management constraints mandate a 'hold' action due to a high risk score and volatility. Despite strong bullish fundamentals, the valuation analysis is extremely bearish, indicating the price does not offer a good entry point. Sentiment is also strongly bearish, which supports the decision to hold. Therefore, we adhere to the risk management directive and maintain our position with no trades."
+    },
+    "RIOT": {
+      "action": "hold",
+      "quantity": 0,
+      "confidence": 0.35,
+      "agent_signals": [
+        {
+          "agent_name": "Valuation Analysis",
+          "signal": "bullish",
+          "confidence": 1165525
+        },
+        {
+          "agent_name": "Fundamental Analysis",
+          "signal": "bullish",
+          "confidence": 0.75
+        },
+        {
+          "agent_name": "Technical Analysis",
+          "signal": "neutral",
+          "confidence": 0.03
+        },
+        {
+          "agent_name": "Sentiment Analysis",
+          "signal": "bullish",
+          "confidence": 0.75
+        },
+        {
+          "agent_name": "Risk Management",
+          "signal": "hold",
+          "confidence": 1.0
+        }
+      ],
+      "reasoning": "The risk management constraint dictates a hold action, which must be followed. Despite strong bullish signals from valuation (1165525% confidence) and fundamental analysis (75% confidence), as well as positive sentiment (75% confidence), the risk score is high with a risk management directive to hold. Technical analysis is neutral, offering no strong timing signal to counterbalance the risk directive. Therefore, the action is to hold with a confidence adjusted to 35% reflecting the weight of the valuation signal."
     },
     "MSTR": {
       "action": "hold",
@@ -184,384 +184,13 @@
       "confidence": 0.35,
       "agent_signals": [
         {
-          "agent": "Valuation Analysis",
-          "signal": "bearish",
-          "confidence": 1.0
-        },
-        {
-          "agent": "Fundamental Analysis",
-          "signal": "neutral",
-          "confidence": 0.25
-        },
-        {
-          "agent": "Technical Analysis",
-          "signal": "bearish",
-          "confidence": 0.25
-        },
-        {
-          "agent": "Sentiment Analysis",
-          "signal": "bullish",
-          "confidence": 0.8
-        },
-        {
-          "agent": "Risk Management",
-          "signal": "hold",
-          "confidence": 1.0
-        }
-      ],
-      "reasoning": "Risk management mandates a hold action due to a high risk score and volatility concerns. Valuation is strongly bearish, suggesting the asset is overvalued, which heavily influences the decision. Fundamental analysis is neutral, indicating no strong long-term potential. Technical analysis is bearish, aligning with valuation for entry timing. Despite bullish sentiment, risk constraints and valuation weigh more heavily. Therefore, the decision is to hold with no position taken."
-    },
-    "PLTR": {
-      "action": "hold",
-      "quantity": 0,
-      "confidence": 0.97,
-      "agent_signals": [
-        {
-          "agent": "Technical Analysis",
-          "signal": "neutral",
-          "confidence": 0.5
-        },
-        {
-          "agent": "Fundamental Analysis",
-          "signal": "neutral",
-          "confidence": 0.25
-        },
-        {
-          "agent": "Sentiment Analysis",
-          "signal": "bearish",
-          "confidence": 0.6
-        },
-        {
-          "agent": "Valuation Analysis",
-          "signal": "bearish",
-          "confidence": 0.97
-        },
-        {
-          "agent": "Risk Management",
-          "signal": "hold",
-          "confidence": 1.0
-        }
-      ],
-      "reasoning": "The risk management signal dictates a hold action due to high risk scores and market volatility, which is a hard constraint. Valuation analysis shows a strong bearish signal with a high confidence of 97%, indicating that the market cap significantly exceeds intrinsic value. Fundamental analysis is neutral overall but notes a bearish signal on price ratios. Technical analysis is neutral, providing no strong timing signal. Sentiment is bearish, slightly reinforcing the decision to hold. Given these signals and the hard constraint from risk management, the decision is to hold with no position change."
-    },
-    "TSLA": {
-      "action": "hold",
-      "quantity": 0,
-      "confidence": 0.95,
-      "agent_signals": [
-        {
-          "agent_name": "Technical Analysis",
-          "signal": "bearish",
-          "confidence": 0.24
-        },
-        {
-          "agent_name": "Fundamental Analysis",
-          "signal": "bearish",
-          "confidence": 0.75
-        },
-        {
-          "agent_name": "Sentiment Analysis",
-          "signal": "bearish",
-          "confidence": 1.0
-        },
-        {
           "agent_name": "Valuation Analysis",
           "signal": "bearish",
-          "confidence": 0.99
-        }
-      ],
-      "reasoning": "The risk management recommendation is to hold, which is a hard constraint that must be followed. Valuation analysis indicates a strong bearish signal with high confidence due to significant overvaluation. Fundamental analysis also supports a bearish view due to poor growth and profitability metrics. Technical analysis, although bearish, is less influential in this decision due to lower confidence. Sentiment is entirely bearish, reinforcing the overall negative view. Despite the strong bearish sentiment across all analysis types, risk management constraints dictate a hold position, aligning with the risk score and market conditions."
-    },
-    "PDYN": {
-      "action": "hold",
-      "quantity": 0,
-      "confidence": 0.9,
-      "agent_signals": [
-        {
-          "agent_name": "Technical Analysis",
-          "signal": "neutral",
-          "confidence": 0.0
+          "confidence": 1.0
         },
         {
           "agent_name": "Fundamental Analysis",
           "signal": "neutral",
-          "confidence": 0.5
-        },
-        {
-          "agent_name": "Sentiment Analysis",
-          "signal": "bearish",
-          "confidence": 0.67
-        },
-        {
-          "agent_name": "Valuation Analysis",
-          "signal": "bearish",
-          "confidence": 1.23
-        },
-        {
-          "agent_name": "Risk Management",
-          "signal": "hold",
-          "confidence": 1.0
-        }
-      ],
-      "reasoning": "The risk management constraints dictate a hold action due to a high risk score. Valuation analysis strongly suggests bearish sentiment, indicating the asset is overvalued, which agrees with fundamental analysis showing weak business metrics. Technical analysis is neutral and does not contradict other bearish signals. Sentiment analysis is also bearish, supporting the hold decision. Overall, the signals align with the risk management's hold directive."
-    },
-    "RKLB": {
-      "action": "hold",
-      "quantity": 0,
-      "confidence": 0.0,
-      "agent_signals": [
-        {
-          "agent": "Valuation Analysis",
-          "signal": "bearish",
-          "confidence": 1.08
-        },
-        {
-          "agent": "Fundamental Analysis",
-          "signal": "neutral",
-          "confidence": 0.25
-        },
-        {
-          "agent": "Technical Analysis",
-          "signal": "bearish",
-          "confidence": 0.23
-        },
-        {
-          "agent": "Sentiment Analysis",
-          "signal": "bearish",
-          "confidence": 1.0
-        }
-      ],
-      "reasoning": "The risk management constraints mandate a hold action, which supersedes all other signals. Despite the bearish signals from valuation and sentiment analyses indicating potential overvaluation and negative sentiment, the trading action dictated by risk management is to hold due to high risk factors. Fundamental analysis is neutral, and technical analysis is bearish, but these are not actionable given the hold constraint. No action is taken, and confidence in the hold decision aligns with risk management's directives."
-    },
-    "RCAT": {
-      "action": "hold",
-      "quantity": 0,
-      "confidence": 0.8,
-      "agent_signals": [
-        {
-          "agent_name": "Valuation Analysis",
-          "signal": "bearish",
-          "confidence": 1.1
-        },
-        {
-          "agent_name": "Fundamental Analysis",
-          "signal": "bearish",
-          "confidence": 0.5
-        },
-        {
-          "agent_name": "Technical Analysis",
-          "signal": "neutral",
-          "confidence": 0.19
-        },
-        {
-          "agent_name": "Sentiment Analysis",
-          "signal": "bearish",
-          "confidence": 0.8
-        }
-      ],
-      "reasoning": "The risk management constraint mandates a hold action with a max position size of 12500 shares, which must be adhered to. Valuation analysis indicates a strong bearish signal with a confidence of 110%, suggesting the price is significantly overvalued. Fundamental analysis also suggests a bearish outlook due to negative profitability and growth metrics. Technical analysis is neutral, providing no strong entry or exit timing. Sentiment analysis is bearish, with 80% confidence, reflecting negative market sentiment. Given these signals and the risk management directive, holding is the most prudent action."
-    },
-    "AISP": {
-      "action": "hold",
-      "quantity": 0,
-      "confidence": 0.0,
-      "agent_signals": [
-        {
-          "agent_name": "Technical Analysis",
-          "signal": "neutral",
-          "confidence": 0.0
-        },
-        {
-          "agent_name": "Fundamental Analysis",
-          "signal": "bullish",
-          "confidence": 0.5
-        },
-        {
-          "agent_name": "Sentiment Analysis",
-          "signal": "bearish",
-          "confidence": 1.0
-        },
-        {
-          "agent_name": "Valuation Analysis",
-          "signal": "bearish",
-          "confidence": 42.64
-        },
-        {
-          "agent_name": "Risk Management",
-          "signal": "hold",
-          "confidence": 1.0
-        }
-      ],
-      "reasoning": "The risk management recommendation is to hold, which is a hard constraint and must be followed. Valuation analysis is strongly bearish, indicating the price is significantly overvalued. Fundamental analysis shows mixed signals but leans slightly bullish, whereas sentiment analysis is bearish with high confidence. Technical analysis is neutral. Given the risk management constraint to hold and the overall signals being bearish to neutral, holding is the appropriate decision."
-    },
-    "APLD": {
-      "action": "hold",
-      "quantity": 0,
-      "confidence": 0.9,
-      "agent_signals": [
-        {
-          "agent_name": "Technical Analysis",
-          "signal": "neutral",
-          "confidence": 0.11
-        },
-        {
-          "agent_name": "Fundamental Analysis",
-          "signal": "bearish",
-          "confidence": 0.5
-        },
-        {
-          "agent_name": "Sentiment Analysis",
-          "signal": "bearish",
-          "confidence": 0.8
-        },
-        {
-          "agent_name": "Valuation Analysis",
-          "signal": "bearish",
-          "confidence": 1.12
-        },
-        {
-          "agent_name": "Risk Management",
-          "signal": "hold",
-          "confidence": 1.0
-        }
-      ],
-      "reasoning": "The risk management constraint mandates a hold action, which overrides all other signals. Valuation analysis, with the highest weight, is strongly bearish, indicating the stock is overvalued. Fundamental analysis also leans bearish due to poor profitability and financial health despite some growth signals. Technical analysis is neutral, providing no strong timing signal. Sentiment is bearish, reinforcing the negative sentiment around the stock. Overall, the combination of these factors under risk constraints leads to a hold decision with high confidence."
-    },
-    "NVDA": {
-      "action": "hold",
-      "quantity": 0,
-      "confidence": 0.71,
-      "agent_signals": [
-        {
-          "agent_name": "Valuation Analysis",
-          "signal": "bearish",
-          "confidence": 71
-        },
-        {
-          "agent_name": "Fundamental Analysis",
-          "signal": "bullish",
-          "confidence": 75
-        },
-        {
-          "agent_name": "Technical Analysis",
-          "signal": "neutral",
-          "confidence": 16
-        },
-        {
-          "agent_name": "Sentiment Analysis",
-          "signal": "bearish",
-          "confidence": 100
-        }
-      ],
-      "reasoning": "Risk management constraints require holding the position despite available cash, as the trading action is 'hold'. Valuation analysis is bearish with high confidence due to significant overvaluation, outweighing the strong bullish fundamentals. Technical analysis is neutral, providing no strong timing signal. Sentiment is strongly bearish, further supporting a cautious stance. Thus, we hold the position in accordance with risk management directives."
-    },
-    "IDR": {
-      "action": "hold",
-      "quantity": 0,
-      "confidence": 0.5,
-      "agent_signals": [
-        {
-          "agent": "Valuation Analysis",
-          "signal": "bearish",
-          "confidence": 18
-        },
-        {
-          "agent": "Fundamental Analysis",
-          "signal": "bullish",
-          "confidence": 75
-        },
-        {
-          "agent": "Technical Analysis",
-          "signal": "neutral",
-          "confidence": 0
-        },
-        {
-          "agent": "Sentiment Analysis",
-          "signal": "bullish",
-          "confidence": 100
-        },
-        {
-          "agent": "Risk Management",
-          "signal": "hold",
-          "confidence": 100
-        }
-      ],
-      "reasoning": "Risk Management mandates a 'hold' action due to high risk score, overriding other signals. Valuation is bearish, suggesting overvaluation. Fundamental analysis is bullish with strong profitability and growth, but valuation concerns limit action. Technical analysis is neutral, offering no strong entry signal. Sentiment is bullish, but risk constraints prevent action."
-    },
-    "SMR": {
-      "action": "hold",
-      "quantity": 0,
-      "confidence": 0.35,
-      "agent_signals": [
-        {
-          "agent_name": "Technical Analysis",
-          "signal": "neutral",
-          "confidence": 0.2
-        },
-        {
-          "agent_name": "Fundamental Analysis",
-          "signal": "bearish",
-          "confidence": 0.25
-        },
-        {
-          "agent_name": "Sentiment Analysis",
-          "signal": "bullish",
-          "confidence": 0.6
-        },
-        {
-          "agent_name": "Valuation Analysis",
-          "signal": "bearish",
-          "confidence": 1.52
-        },
-        {
-          "agent_name": "Risk Management",
-          "signal": "hold",
-          "confidence": 1.0
-        }
-      ],
-      "reasoning": "Risk management mandates a hold action due to a high risk score of 10/10 and a volatile market environment. The valuation analysis strongly suggests bearishness with significant gaps in intrinsic value assessments, outweighing other considerations. Despite bullish sentiment, the bearish signals from valuation and fundamentals, combined with the risk constraints, dictate a hold position. Technical analysis is neutral, providing no strong counter-argument to the bearish valuation and fundamental signals."
-    },
-    "SERV": {
-      "action": "hold",
-      "quantity": 0,
-      "confidence": 0.133,
-      "agent_signals": [
-        {
-          "agent_name": "Valuation Analysis",
-          "signal": "bearish",
-          "confidence": 1.33
-        },
-        {
-          "agent_name": "Fundamental Analysis",
-          "signal": "bullish",
-          "confidence": 0.5
-        },
-        {
-          "agent_name": "Technical Analysis",
-          "signal": "neutral",
-          "confidence": 0.19
-        },
-        {
-          "agent_name": "Sentiment Analysis",
-          "signal": "bearish",
-          "confidence": 1.0
-        }
-      ],
-      "reasoning": "The risk management constraint mandates a 'hold' action due to a high risk score and market volatility. Valuation analysis strongly indicates a bearish signal with extremely low intrinsic value compared to the market cap. Fundamental analysis shows mixed signals with strong financial health but poor profitability. Technical analysis does not provide a strong directional signal, and sentiment analysis is overwhelmingly bearish. Given these factors, holding is the prudent action, especially with risk management prioritizing preservation of capital in a high-risk environment."
-    },
-    "KITT": {
-      "action": "hold",
-      "quantity": 0,
-      "confidence": 0.8,
-      "agent_signals": [
-        {
-          "agent_name": "Valuation Analysis",
-          "signal": "bearish",
-          "confidence": 0.995
-        },
-        {
-          "agent_name": "Fundamental Analysis",
-          "signal": "bullish",
           "confidence": 0.25
         },
         {
@@ -572,10 +201,366 @@
         {
           "agent_name": "Sentiment Analysis",
           "signal": "bullish",
+          "confidence": 0.8
+        }
+      ],
+      "reasoning": "The risk management constraints dictate a 'hold' action due to high risk scores. Valuation analysis shows a strong bearish signal with 100% confidence, indicating the stock is significantly overvalued, which strongly discourages a buy. Fundamental analysis is neutral with low confidence, showing weak profitability and growth. Technical analysis provides no clear direction, reinforcing a neutral stance. Although sentiment analysis is bullish with high confidence, it only has a minor influence on the overall decision due to its lower weight. Overall, the decision is to hold based on risk management constraints and the bearish valuation signal."
+    },
+    "PLTR": {
+      "action": "hold",
+      "quantity": 0,
+      "confidence": 0.97,
+      "agent_signals": [
+        {
+          "agent_name": "Valuation Analysis",
+          "signal": "bearish",
+          "confidence": 0.97
+        },
+        {
+          "agent_name": "Fundamental Analysis",
+          "signal": "neutral",
+          "confidence": 0.25
+        },
+        {
+          "agent_name": "Technical Analysis",
+          "signal": "neutral",
+          "confidence": 0
+        },
+        {
+          "agent_name": "Sentiment Analysis",
+          "signal": "bearish",
+          "confidence": 1.0
+        },
+        {
+          "agent_name": "Risk Management",
+          "signal": "hold",
           "confidence": 1.0
         }
       ],
-      "reasoning": "Risk management constraints require a 'hold' action due to a risk score of 10/10 and high market risk. Valuation analysis is overwhelmingly bearish, indicating the stock is significantly overvalued, which aligns with holding. Fundamental analysis shows some bullishness but is not strong enough to override risk constraints. Technical analysis is neutral, offering no compelling timing signals. Sentiment is bullish but not impactful enough given the strong bearish valuation signal and risk constraints. Thus, the decision is to hold with high confidence in adhering to the risk management directive."
+      "reasoning": "Risk management mandates a hold action, which cannot be overridden. Valuation analysis is strongly bearish, indicating the security is significantly overvalued. Fundamental analysis shows mixed signals with poor price ratios but strong financial health. Technical analysis is neutral, providing no clear entry or exit cues. Sentiment is bearish, reinforcing caution. Given the risk management constraint and the weight of bearish valuation and sentiment signals, holding is the prudent action."
+    },
+    "TSLA": {
+      "action": "hold",
+      "quantity": 0,
+      "confidence": 0.95,
+      "agent_signals": [
+        {
+          "agent_name": "Valuation Analysis",
+          "signal": "bearish",
+          "confidence": 0.99
+        },
+        {
+          "agent_name": "Fundamental Analysis",
+          "signal": "bearish",
+          "confidence": 0.75
+        },
+        {
+          "agent_name": "Technical Analysis",
+          "signal": "neutral",
+          "confidence": 0.06
+        },
+        {
+          "agent_name": "Sentiment Analysis",
+          "signal": "bearish",
+          "confidence": 0.75
+        },
+        {
+          "agent_name": "Risk Management",
+          "signal": "hold",
+          "confidence": 1.0
+        }
+      ],
+      "reasoning": "The decision to hold is primarily driven by the Risk Management constraint which mandates no action other than holding. The Valuation Analysis suggests an extremely overvalued market position, indicating a bearish outlook with high confidence. Fundamental Analysis supports this bearish view with poor growth and profitability metrics. Sentiment Analysis is also bearish, indicating negative market sentiment. Technical Analysis is neutral, providing no strong timing signal. Despite the cash available, the hold directive from Risk Management takes precedence due to high market risk and volatility."
+    },
+    "PDYN": {
+      "action": "hold",
+      "quantity": 0,
+      "confidence": 0.5,
+      "agent_signals": [
+        {
+          "agent": "Technical Analysis",
+          "signal": "neutral",
+          "confidence": 0.0
+        },
+        {
+          "agent": "Fundamental Analysis",
+          "signal": "neutral",
+          "confidence": 0.5
+        },
+        {
+          "agent": "Sentiment Analysis",
+          "signal": "bearish",
+          "confidence": 0.67
+        },
+        {
+          "agent": "Valuation Analysis",
+          "signal": "bearish",
+          "confidence": 1.22
+        }
+      ],
+      "reasoning": "Risk management mandates a 'hold' action, which is a strict constraint. Valuation analysis strongly indicates a bearish outlook due to significant intrinsic value gaps, influencing the decision with the highest weight. Fundamental analysis is neutral with mixed signals, slightly bullish financial health and price ratios, but poor profitability and growth. Technical analysis is neutral, offering no strong timing signals. Sentiment is bearish, reflecting negative market perception, but has the lowest weight. Overall, the mandatory hold action is supported by negative valuation and sentiment signals."
+    },
+    "RKLB": {
+      "action": "hold",
+      "quantity": 0,
+      "confidence": 0.1,
+      "agent_signals": [
+        {
+          "agent_name": "Valuation Analysis",
+          "signal": "bearish",
+          "confidence": 1.09
+        },
+        {
+          "agent_name": "Fundamental Analysis",
+          "signal": "neutral",
+          "confidence": 0.25
+        },
+        {
+          "agent_name": "Technical Analysis",
+          "signal": "neutral",
+          "confidence": 0.03
+        },
+        {
+          "agent_name": "Sentiment Analysis",
+          "signal": "bearish",
+          "confidence": 1.0
+        }
+      ],
+      "reasoning": "The risk management constraints dictate a 'hold' action, which must be followed. Valuation analysis is strongly bearish, indicating the stock is overvalued. Fundamental analysis is neutral, showing mixed signals with a bearish profitability indicator but stable financial health. Technical analysis is neutral with a slight bullish mean reversion signal. Sentiment analysis is strongly bearish, indicating negative market sentiment. Despite bearish valuation and sentiment signals, the risk management 'hold' action takes precedence, and no trading action is taken."
+    },
+    "RCAT": {
+      "action": "hold",
+      "quantity": 0,
+      "confidence": 0.81,
+      "agent_signals": [
+        {
+          "agent_name": "Valuation Analysis",
+          "signal": "bearish",
+          "confidence": 1.12
+        },
+        {
+          "agent_name": "Fundamental Analysis",
+          "signal": "bearish",
+          "confidence": 0.5
+        },
+        {
+          "agent_name": "Technical Analysis",
+          "signal": "bearish",
+          "confidence": 0.26
+        },
+        {
+          "agent_name": "Sentiment Analysis",
+          "signal": "bearish",
+          "confidence": 0.8
+        }
+      ],
+      "reasoning": "The risk management constraint dictates a 'hold' action, which is non-negotiable. Valuation analysis strongly supports a bearish outlook with a confidence of 112%, indicating the price is significantly overvalued. Fundamental analysis corroborates with a bearish signal due to negative profitability and growth indicators. Technical analysis suggests a bearish trend, albeit with lower confidence. Sentiment analysis is also bearish with high confidence. Despite these signals, we must adhere to the risk management directive to hold, resulting in no trade action."
+    },
+    "AISP": {
+      "action": "hold",
+      "quantity": 0,
+      "confidence": 0.5336,
+      "agent_signals": [
+        {
+          "agent_name": "Valuation Analysis",
+          "signal": "bearish",
+          "confidence": 5336
+        },
+        {
+          "agent_name": "Fundamental Analysis",
+          "signal": "bullish",
+          "confidence": 0.5
+        },
+        {
+          "agent_name": "Technical Analysis",
+          "signal": "neutral",
+          "confidence": 0.17
+        },
+        {
+          "agent_name": "Sentiment Analysis",
+          "signal": "bullish",
+          "confidence": 1.0
+        },
+        {
+          "agent_name": "Risk Management",
+          "signal": "hold",
+          "confidence": 1.0
+        }
+      ],
+      "reasoning": "The risk management constraints dictate a 'hold' action due to the high risk score. Valuation analysis is overwhelmingly bearish, indicating a significant overvaluation and no suitable entry point. Although the fundamental and sentiment analyses are bullish, they do not outweigh the strong bearish signal from valuation. Technical analysis is neutral and does not provide a compelling timing indicator. Therefore, the decision is to hold with a confidence level reflecting the strong bearish valuation signal."
+    },
+    "APLD": {
+      "action": "hold",
+      "quantity": 0,
+      "confidence": 0.8,
+      "agent_signals": [
+        {
+          "agent": "Valuation Analysis",
+          "signal": "bearish",
+          "confidence": 1.13
+        },
+        {
+          "agent": "Fundamental Analysis",
+          "signal": "bearish",
+          "confidence": 0.5
+        },
+        {
+          "agent": "Technical Analysis",
+          "signal": "neutral",
+          "confidence": 0.11
+        },
+        {
+          "agent": "Sentiment Analysis",
+          "signal": "bearish",
+          "confidence": 0.8
+        }
+      ],
+      "reasoning": "Risk management mandates a 'hold' position due to a high risk score. Valuation analysis indicates a strong bearish signal with a confidence of 113%, suggesting overvaluation. Fundamental analysis is also bearish, indicating poor profitability and financial health, despite some growth potential. Sentiment analysis is predominantly bearish with an 80% confidence. Technical analysis provides a neutral signal, but due to risk constraints, no action can be taken at this time."
+    },
+    "NVDA": {
+      "action": "hold",
+      "quantity": 0,
+      "confidence": 0.68,
+      "agent_signals": [
+        {
+          "agent_name": "Technical Analysis",
+          "signal": "neutral",
+          "confidence": 0.02
+        },
+        {
+          "agent_name": "Fundamental Analysis",
+          "signal": "bullish",
+          "confidence": 0.75
+        },
+        {
+          "agent_name": "Sentiment Analysis",
+          "signal": "bullish",
+          "confidence": 1.0
+        },
+        {
+          "agent_name": "Valuation Analysis",
+          "signal": "bearish",
+          "confidence": 0.68
+        }
+      ],
+      "reasoning": "The risk management constraint dictates a 'hold' action, which takes precedence over other signals. The valuation analysis indicates that the asset is overvalued with a confidence of 68%, which aligns with the 'hold' recommendation. Despite strong bullish signals from fundamental and sentiment analyses, the valuation concerns and risk management constraints lead to a hold decision. The technical analysis does not provide a clear directional cue, further supporting a cautious approach."
+    },
+    "IDR": {
+      "action": "hold",
+      "quantity": 0,
+      "confidence": 0.5,
+      "agent_signals": [
+        {
+          "agent_name": "Technical Analysis",
+          "signal": "neutral",
+          "confidence": 0.18
+        },
+        {
+          "agent_name": "Fundamental Analysis",
+          "signal": "bullish",
+          "confidence": 0.75
+        },
+        {
+          "agent_name": "Sentiment Analysis",
+          "signal": "bullish",
+          "confidence": 1.0
+        },
+        {
+          "agent_name": "Valuation Analysis",
+          "signal": "bearish",
+          "confidence": 0.16
+        },
+        {
+          "agent_name": "Risk Management",
+          "signal": "hold",
+          "confidence": 1.0
+        }
+      ],
+      "reasoning": "Risk management constraints dictate a hold position, overriding other signals. Valuation analysis is bearish, suggesting the stock is overvalued, which aligns with the hold recommendation. Fundamental analysis is bullish, indicating strong business quality, but cannot override risk management. Technical analysis shows a neutral signal, offering no strong timing guidance. Sentiment is bullish but has the least weight in decision-making. Given the risk management directive and mixed signals, holding is the prudent action with confidence level reflecting the dominant bullish sentiment in fundamentals and sentiment, tempered by valuation concerns."
+    },
+    "SMR": {
+      "action": "hold",
+      "quantity": 0,
+      "confidence": 0.35,
+      "agent_signals": [
+        {
+          "agent_name": "Valuation Analysis",
+          "signal": "bearish",
+          "confidence": 1.04
+        },
+        {
+          "agent_name": "Fundamental Analysis",
+          "signal": "bullish",
+          "confidence": 0.5
+        },
+        {
+          "agent_name": "Technical Analysis",
+          "signal": "bearish",
+          "confidence": 0.22
+        },
+        {
+          "agent_name": "Sentiment Analysis",
+          "signal": "bearish",
+          "confidence": 0.6
+        }
+      ],
+      "reasoning": "Risk management constraints dictate a hold action due to a high risk score and volatile environment. Valuation analysis is strongly bearish, indicating overvaluation, which suggests avoiding new positions. Fundamental analysis shows mixed signals but leans bullish due to growth and financial health, though profitability is poor. Technical analysis is slightly bearish, offering no strong incentive for immediate action. Sentiment is bearish, further supporting a cautious stance. Overall, the weight of analysis supports holding the current position with no new action."
+    },
+    "SERV": {
+      "action": "hold",
+      "quantity": 0,
+      "confidence": 0.75,
+      "agent_signals": [
+        {
+          "agent_name": "Valuation Analysis",
+          "signal": "bearish",
+          "confidence": 1.28
+        },
+        {
+          "agent_name": "Fundamental Analysis",
+          "signal": "neutral",
+          "confidence": 0.25
+        },
+        {
+          "agent_name": "Technical Analysis",
+          "signal": "bearish",
+          "confidence": 0.23
+        },
+        {
+          "agent_name": "Sentiment Analysis",
+          "signal": "bearish",
+          "confidence": 1.0
+        }
+      ],
+      "reasoning": "Risk management has dictated a 'hold' action due to a maximum risk score. The valuation analysis provides a strong bearish signal with high confidence, indicating the stock is overvalued. Fundamental analysis shows mixed signals with a neutral outcome, while technical analysis is weakly bearish. Sentiment analysis is strongly bearish, reinforcing the decision to hold. Given the risk constraints and bearish signals, holding is the prudent action."
+    },
+    "KITT": {
+      "action": "hold",
+      "quantity": 0,
+      "confidence": 0.3639,
+      "agent_signals": [
+        {
+          "agent_name": "Valuation Analysis",
+          "signal": "bearish",
+          "confidence": 0.3639
+        },
+        {
+          "agent_name": "Fundamental Analysis",
+          "signal": "bullish",
+          "confidence": 0.25
+        },
+        {
+          "agent_name": "Technical Analysis",
+          "signal": "neutral",
+          "confidence": 0.13
+        },
+        {
+          "agent_name": "Sentiment Analysis",
+          "signal": "bullish",
+          "confidence": 1.0
+        }
+      ],
+      "reasoning": "The risk management constraint mandates a 'hold' action, which overrides all other signals. Valuation Analysis is overwhelmingly bearish with high confidence due to significant negative intrinsic value gaps. Fundamental Analysis, while bullish, has lower confidence and mixed signals in profitability and growth. Technical Analysis is neutral, providing no strong timing indication. Sentiment Analysis is bullish but has the least weight. Overall, the bearish valuation and risk management directive to hold dictate the decision."
     }
   }
 }
