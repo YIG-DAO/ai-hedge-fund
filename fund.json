@@ -57,7 +57,9 @@
         "name": "Rare Earth Metals",
         "holdings": [
           "MP",
-          "IDR"
+          "IDR",
+          "NAK",
+          "CRML"
         ]
       },
       "nuclear": {

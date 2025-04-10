@@ -4,18 +4,19 @@ An AI-powered hedge fund analysis and reporting system with a focus on reindustr
 
 ## Features
 
-- Weekly reindustrialization trend analysis using Perplexity API
-- Automated email reports distribution
-- PostgreSQL integration for subscriber management
-- Docker Swarm deployment support
-- Scheduled execution (Mondays at 6 AM CST)
+* Weekly reindustrialization trend analysis using Perplexity API
+* Automated email reports distribution
+* PostgreSQL integration for subscriber management
+* Docker Swarm deployment support
+* Scheduled execution (Mondays at 6 AM CST)
+* Legal disclaimer clarifying non-investment advice status
 
 ## Prerequisites
 
-- Python 3.11+
-- Poetry
-- PostgreSQL database
-- SMTP server for email delivery
+* Python 3.11+
+* Poetry
+* PostgreSQL database
+* SMTP server for email delivery
 
 ## Installation
 
@@ -71,12 +72,12 @@ docker service logs reindustrialization_reindustrialization-report
 
 Required environment variables:
 
-- `PERPLEXITY_API_KEY`: Your Perplexity API key
-- `POSTGRES_*`: PostgreSQL connection details
-- `SMTP_*`: Email server configuration
-- `SENDER_EMAIL`: Sender email address
-- `DOCKER_REGISTRY`: (Optional) Docker registry for image storage
-- `TAG`: (Optional) Docker image tag
+* `PERPLEXITY_API_KEY`: Your Perplexity API key
+* `POSTGRES_*`: PostgreSQL connection details
+* `SMTP_*`: Email server configuration
+* `SENDER_EMAIL`: Sender email address
+* `DOCKER_REGISTRY`: (Optional) Docker registry for image storage
+* `TAG`: (Optional) Docker image tag
 
 ## Scheduling
 
@@ -111,16 +112,36 @@ poetry run python -m src.tools.report
 poetry run python -m src.tools.report --email user@example.com
 ```
 
+5. Run in test mode:
+   * Sends a test report to the default test email
+   * Optionally, specify an email address to send the test report to
+
+```bash
+poetry run python workflow.py --test
+poetry run python workflow.py --email user@example.com --test
+```
+
 ### Email Configuration
 
 To send emails, set these environment variables in your `.env` file:
-```
+
+```bash
 SMTP_SERVER=smtp.example.com
 SMTP_PORT=587
 SMTP_USERNAME=your_username
 SMTP_PASSWORD=your_password
 SENDER_EMAIL=sender@example.com
 ```
+
+### Report Features
+
+The generated reports include:
+
+* Reindustrialization trend analysis
+* Fund holdings analysis with AI-driven insights
+* Market impact analysis
+* Single consolidated footer with contact information
+* Legal disclaimer stating that content is for informational purposes only and not investment advice
 
 ## Development
 
