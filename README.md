@@ -7,7 +7,7 @@ An AI-powered hedge fund analysis and reporting system with a focus on reindustr
 * Weekly reindustrialization trend analysis using Perplexity API
 * Automated email reports distribution
 * PostgreSQL integration for subscriber management
-* Docker Swarm deployment support
+* Docker deployment support
 * Scheduled execution (Mondays at 6 AM CST)
 * Legal disclaimer clarifying non-investment advice status
 
@@ -21,20 +21,23 @@ An AI-powered hedge fund analysis and reporting system with a focus on reindustr
 ## Installation
 
 1. Clone the repository:
-```bash
-git clone https://github.com/YIG-DAO/reindustrialization-newsletter.git
-cd reindustrialization-newsletter
-```
+
+    ```bash
+    git clone https://github.com/YIG-DAO/reindustrialization-newsletter.git
+    cd reindustrialization-newsletter
+    ```
 
 2. Copy the environment file and configure your variables:
-```bash
-cp .env.example .env
-```
+
+    ```bash
+    cp .env.example .env
+    ```
 
 3. Install dependencies with Poetry:
-```bash
-poetry install
-```
+
+    ```bash
+    poetry install
+    ```
 
 ## Database Setup
 
@@ -52,20 +55,33 @@ CREATE TABLE subscribers (
 
 ## Docker Deployment
 
-1. Initialize Docker Swarm (if not already done):
+Build the Docker image:
+
 ```bash
-docker swarm init
+docker build -t reindustrialization-newsletter .
 ```
 
-2. Deploy the stack:
+Run the container, ensuring you provide the necessary environment variables (e.g., via an `.env` file):
+
 ```bash
-docker stack deploy -c docker-compose.yml reindustrialization
+docker run --rm --env-file .env reindustrialization-newsletter
 ```
 
-3. Check service status:
+Or pass variables directly:
+
 ```bash
-docker service ls
-docker service logs reindustrialization_reindustrialization-report
+docker run --rm \
+  -e PERPLEXITY_API_KEY='your_key' \
+  -e POSTGRES_DB='your_db' \
+  -e POSTGRES_USER='your_user' \
+  # ... other required variables
+  reindustrialization-newsletter
+```
+
+To check the logs of a running container (replace `<container_id>` with the actual ID):
+
+```bash
+docker logs <container_id>
 ```
 
 ## Environment Variables
@@ -93,33 +109,37 @@ The service runs automatically every Monday at 6 AM CST. The workflow:
 ### Run Commands
 
 1. Analyze a single ticker:
-```bash
-poetry run python src/main.py --ticker AAPL --show-reasoning
-```
+
+    ```bash
+    poetry run python src/main.py --ticker AAPL --show-reasoning
+    ```
 
 2. Run the complete workflow (process all tickers and send emails):
-```bash
-poetry run python workflow.py
-```
+
+    ```bash
+    poetry run python workflow.py
+    ```
 
 3. Generate report without sending emails:
-```bash
-poetry run python -m src.tools.report
-```
+
+    ```bash
+    poetry run python -m src.tools.report
+    ```
 
 4. Send report to specific email(s):
-```bash
-poetry run python -m src.tools.report --email user@example.com
-```
+
+    ```bash
+    poetry run python -m src.tools.report --email user@example.com
+    ```
 
 5. Run in test mode:
-   * Sends a test report to the default test email
-   * Optionally, specify an email address to send the test report to
+    * Sends a test report to the default test email
+    * Optionally, specify an email address to send the test report to
 
-```bash
-poetry run python workflow.py --test
-poetry run python workflow.py --email user@example.com --test
-```
+    ```bash
+    poetry run python workflow.py --test
+    poetry run python workflow.py --email user@example.com --test
+    ```
 
 ### Email Configuration
 
@@ -153,17 +173,14 @@ To run locally for development:
 
 ## Monitoring
 
-Monitor the service using Docker Swarm commands:
+Monitor the service using standard Docker commands:
 
 ```bash
-# View service status
-docker service ls
+# List running containers
+docker ps
 
 # Check logs
-docker service logs reindustrialization_reindustrialization-report
-
-# Scale service
-docker service scale reindustrialization_reindustrialization-report=N
+docker logs <container_id>
 ```
 
 ## Contributing

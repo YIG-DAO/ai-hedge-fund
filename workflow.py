@@ -40,7 +40,7 @@ def process_ticker(ticker):
     try:
         import subprocess
         result = subprocess.run(
-            ['poetry', 'run', 'python', 'src/main.py', '--ticker', ticker, '--show-reasoning'],
+            ['python', 'src/main.py', '--ticker', ticker, '--show-reasoning'],
             capture_output=True,
             text=True
         )
